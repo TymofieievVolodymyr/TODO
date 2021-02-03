@@ -1,7 +1,6 @@
 class Model {
   constructor() {
     this.todos = JSON.parse(localStorage.getItem('todos')) || []
-    console.log(this.todos);
     mediator.pub('listChanges', this.todos);
   }
 
