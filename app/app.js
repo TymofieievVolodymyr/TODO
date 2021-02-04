@@ -1,11 +1,9 @@
 const mediator = new PubSub();
 
-const app = () => {
+class App {
 
-  const render = () => {
-    const app = new Controller(new Model(), new View());
-  };
-
-  render();
-};
+  render(){
+    new Controller(new Model(), new View())
+  }
+}
 
