@@ -1,7 +1,12 @@
-class PubSub {
+export default class  PubSub {
 
   constructor() {
     this._events = {};
+    if (PubSub.exists) {
+      return PubSub.instance
+    }
+    PubSub.instance = this
+    PubSub.exists = true
   }
 
   subscribe(eventName, callback) {
@@ -16,6 +21,4 @@ class PubSub {
       this._events[eventName].forEach(callback => callback(...args));
     }
   };
-
-
 }

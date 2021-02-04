@@ -1,5 +1,7 @@
-class Model {
-  constructor(storage) {
+import {mediator, storage} from "../root";
+
+export default class Model {
+  constructor() {
     this.todos = JSON.parse(storage.getItem('todos')) ?? [];
     mediator.publish('fullList', this.todos);
   }

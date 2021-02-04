@@ -1,4 +1,4 @@
-const formTpl = `
+export const formTpl = `
   <h1>todos</h1>
   <form>
     <input type="text" placeholder="Add item" name="todo">

@@ -1,4 +1,8 @@
-class View {
+import ListItemView from "./listItemView";
+import {formTpl} from "./formTpl";
+import {mediator} from "../root";
+
+export default class View {
   constructor() {
     this.app = this.getElement('#root')
     this.template = this.createElement('div', 'wrapper');
@@ -38,9 +42,7 @@ class View {
     })
   }
 
-
   renderItemTodo(todo) {
-
     this.todoList = this.template.querySelector('.todo-list');
     const liItem = new ListItemView(todo);
     this.todoList.append(liItem.liElement);

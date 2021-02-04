@@ -1,3 +1,4 @@
-const todoApp = new App();
+import App from './app/root';
 
+const todoApp = new App();
 todoApp.render();
