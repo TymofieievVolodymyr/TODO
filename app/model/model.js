@@ -1,6 +1,6 @@
 class Model {
   constructor() {
-    this.todos = JSON.parse(localStorage.getItem('todos')) || [];
+    this.todos = JSON.parse(localStorage.getItem('todos')) ?? [];
     mediator.publish('fullList', this.todos);
   }
 

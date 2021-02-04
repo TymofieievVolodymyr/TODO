@@ -18,7 +18,6 @@ class View {
 
 
   renderListTodo(model, template, root) {
-    console.log(template);
     template.innerHTML = formTpl
     this.todoList = template.querySelector('.todo-list');
     this.input = template.querySelector('input');
