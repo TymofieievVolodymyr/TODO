@@ -1,31 +1,7 @@
 class View {
   constructor() {
     this.app = this.getElement('#root')
-
     this.template = this.createElement('div', 'wrapper');
-
-    this.template.innerHTML = formTpl;
-    this.todoList = this.template.querySelector('.todo-list');
-    this.input = this.template.querySelector('input');
-
-    this.app.append(this.template);
-
-    this.template.addEventListener('submit', event => {
-      event.preventDefault();
-      if (this.todoItemText) {
-        mediator.pub('addInput', this.todoItemText);
-        this.clearInput();
-      }
-    })
-
-  }
-
-  get todoItemText() {
-    return this.input.value
-  }
-
-  clearInput() {
-    this.input.value = ''
   }
 
   createElement(tag, className) {
@@ -35,29 +11,42 @@ class View {
     return element
   }
 
-
   getElement(selector) {
-    const element = document.querySelector(selector)
-
+    const element = document.querySelector(selector);
     return element
   }
 
 
-  displayTodos(todos) {
+  renderListTodo(model, template, root) {
+    console.log(template);
+    template.innerHTML = formTpl
+    this.todoList = template.querySelector('.todo-list');
+    this.input = template.querySelector('input');
 
-    while (this.todoList.firstChild) {
-      this.todoList.removeChild(this.todoList.firstChild)
-    }
+    model.todos.forEach(todo => {
+      const liItem = new ListItemView(todo);
+      this.todoList.append(liItem.liElement);
+    });
 
-    todos.forEach(todo => {
-      const li = this.createElement('li')
-      li.id = todo.id
-      const span = this.createElement('span')
-      span.textContent = todo.text
-      li.append(span)
-      this.todoList.append(li)
+    root.append(template);
+
+    template.addEventListener('submit', event => {
+      event.preventDefault();
+      if (this.input.value !== '') {
+        mediator.pub('addInput', this.input.value);
+        this.input.value = ''
+      }
     })
+  }
 
+
+  renderItemTodo(todo) {
+    console.log(todo)
+
+
+    this.todoList = this.template.querySelector('.todo-list');
+    const liItem = new ListItemView(todo);
+    this.todoList.append(liItem.liElement);
   }
 
 }

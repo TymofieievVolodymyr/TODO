@@ -11,10 +11,10 @@ class PubSub {
     this._events[eventName].push(callback);
   };
 
-  pub(eventName, arg) {
+  pub(eventName, ...args) {
     if (this._events.hasOwnProperty(eventName)) {
       this._events[eventName].forEach(function (callback) {
-        callback(arg);
+        callback(...args);
       });
     }
   };

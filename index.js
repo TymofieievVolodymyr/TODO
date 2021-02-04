@@ -1,3 +1,3 @@
-const todo = new App();
+const todoApp = new App();
 
-todo.render();
+todoApp.render();

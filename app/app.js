@@ -1,3 +1,4 @@
+
 const mediator = new PubSub();
 
 class App {
@@ -6,4 +7,5 @@ class App {
     new Controller(new Model(), new View())
   }
 }
+
 
