@@ -1,14 +1,12 @@
 class Model {
-  constructor() {
-    this.todos = JSON.parse(localStorage.getItem('todos')) ?? [];
+  constructor(storage) {
+    this.todos = JSON.parse(storage.getItem('todos')) ?? [];
     mediator.publish('fullList', this.todos);
   }
 
   attach(todos) {
-    localStorage.setItem('todos', JSON.stringify(todos))
-
+    storage.setItem(JSON.stringify(todos));
   }
-
 
   addTodoItem(todoText) {
     const todo = {
