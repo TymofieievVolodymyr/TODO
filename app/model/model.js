@@ -1,7 +1,7 @@
 class Model {
   constructor() {
-    this.todos = JSON.parse(localStorage.getItem('todos')) || []
-    mediator.pub('fullList', this.todos);
+    this.todos = JSON.parse(localStorage.getItem('todos')) || [];
+    mediator.publish('fullList', this.todos);
   }
 
   attach(todos) {
@@ -17,7 +17,7 @@ class Model {
     }
 
     this.todos.push(todo);
-    mediator.pub('listChanges', todo)
+    mediator.publish('listChanges', todo)
     this.attach(this.todos);
   }
 }

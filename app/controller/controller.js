@@ -4,10 +4,10 @@ class Controller {
     this.model = model;
     this.view = view;
 
-    mediator.sub('fullList', this.view.renderListTodo.bind(this.model.todos));
-    mediator.pub('fullList', this.model, this.view.template, this.view.app);
-    mediator.sub('addInput', this.model.addTodoItem.bind(this.model));
-    mediator.sub('listChanges', this.view.renderItemTodo.bind(this.view));
+    mediator.subscribe('fullList', this.view.renderListTodo.bind(this.model.todos));
+    mediator.publish('fullList', this.model, this.view.template, this.view.app);
+    mediator.subscribe('addInput', this.model.addTodoItem.bind(this.model));
+    mediator.subscribe('listChanges', this.view.renderItemTodo.bind(this.view));
   }
 
 }

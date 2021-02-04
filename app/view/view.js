@@ -33,7 +33,7 @@ class View {
     template.addEventListener('submit', event => {
       event.preventDefault();
       if (this.input.value !== '') {
-        mediator.pub('addInput', this.input.value);
+        mediator.publish('addInput', this.input.value);
         this.input.value = ''
       }
     })
@@ -41,8 +41,6 @@ class View {
 
 
   renderItemTodo(todo) {
-    console.log(todo)
-
 
     this.todoList = this.template.querySelector('.todo-list');
     const liItem = new ListItemView(todo);
