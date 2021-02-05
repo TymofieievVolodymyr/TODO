@@ -18,6 +18,14 @@ export default class DOM {
     return node.append(element);
   }
 
+  static addClassToNode(node, className) {
+    node.classList.add(className);
+  }
+
+  static removeClassFromNode(node, className) {
+    node.classList.add(className);
+  }
+
   static addContent(targetElement, containerEl) {
     return targetElement.insertAdjacentHTML('afterbegin', containerEl);
   }

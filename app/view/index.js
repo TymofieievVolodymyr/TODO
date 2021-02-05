@@ -6,7 +6,7 @@ import DOM from '../utilities/DOM'
 
 export default class View {
   constructor() {
-    this.app = DOM.getElement( document, '#root');
+    this.app = DOM.getElement(document, '#root');
     this.template = DOM.createElement('div', 'wrapper');
   }
 
@@ -17,6 +17,7 @@ export default class View {
     this.todoList = DOM.getElement(template, '.todo-list');
     this.input = DOM.getElement(template, 'input');
 
+
     model.todos.forEach(todo => {
       const liItem = ListItemView.render(todo);
       DOM.append(this.todoList, liItem.liElement);
@@ -24,12 +25,13 @@ export default class View {
 
     DOM.append(root, template);
     template.addEventListener('submit', event => {
+      console.log('submit')
       event.preventDefault();
       if (this.input.value !== '') {
         mediator.publish('addInput', this.input.value);
         this.input.value = '';
       }
-    })
+    });
   }
 
   renderItemTodo(todo) {
