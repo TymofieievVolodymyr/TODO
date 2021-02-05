@@ -1,7 +1,7 @@
 import DOM from "../../utilities/DOM";
 
 export default class ListItemView {
-  render(toDoItem) {
+  static render(toDoItem) {
     this.liElement = DOM.createElement('li');
     this.span = DOM.createElement('span');
     DOM.append(this.liElement, this.span);
