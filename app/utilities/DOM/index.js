@@ -26,8 +26,16 @@ export default class DOM {
     node.classList.add(className);
   }
 
-  static addContent(targetElement, containerEl) {
+  static lastChild(node) {
+    return node.lastElementChild
+  }
+
+  static addContentStart(targetElement, containerEl) {
     return targetElement.insertAdjacentHTML('afterbegin', containerEl);
+  }
+
+  static addContentEnd(targetElement, containerEl) {
+    return targetElement.insertAdjacentHTML('beforeend', containerEl);
   }
 
 }

@@ -8,10 +8,7 @@ export default class ModalView {
   }
 
   renderPopUp() {
-    DOM.addContent(this.body, modalTpl);
+    DOM.addContentStart(this.body, modalTpl);
+    // 🥚 https://coub.com/view/1bqqd0
   }
-
-  // renderBackdrop() {
-  //   DOM.addClassToNode(this.body, '.backdrop');
-  // }
 }

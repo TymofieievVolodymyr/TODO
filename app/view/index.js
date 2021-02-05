@@ -12,14 +12,14 @@ export default class View {
 
   renderListTodo(model, template, root) {
 
-    DOM.addContent(template, formTpl);
+    DOM.addContentStart(template, formTpl);
 
     this.todoList = DOM.getElement(template, '.todo-list');
     this.input = DOM.getElement(template, 'input');
 
 
     model.todos.forEach(todo => {
-      const liItem = ListItemView.render(todo);
+      const liItem = ListItemView.render(todo, template);
       DOM.append(this.todoList, liItem.liElement);
     });
 
@@ -36,7 +36,7 @@ export default class View {
 
   renderItemTodo(todo) {
     this.todoList = DOM.getElement(this.template, '.todo-list');
-    const liItem = ListItemView.render(todo);
+    const liItem = ListItemView.render(todo, this.template);
     DOM.append(this.todoList, liItem.liElement);
   }
 

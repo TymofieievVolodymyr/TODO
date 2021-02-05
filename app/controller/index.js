@@ -12,7 +12,6 @@ export default class Controller {
     mediator.subscribe('addInput', this.model.addTodoItem.bind(this.model));
     mediator.subscribe('listChanges', this.view.renderItemTodo.bind(this.view));
     mediator.subscribe('showModal', this.modalWindow.renderPopUp.bind(this.modalWindow));
-    //mediator.subscribe('changeBackground', this.modalWindow.renderBackdrop.bind(this.modalWindow));
   }
 
 }
