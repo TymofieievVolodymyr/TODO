@@ -11,9 +11,9 @@ html {
 }
 
 body {
-    color:black;
+    color: black;
     font-family: "Questrial", sans-serif;
-    background-image: url("img/background.jpg");
+    background-image: url("img/back1.jpg");
     background-repeat: no-repeat;
     background-size: 100%;
 }
@@ -36,11 +36,6 @@ h1 {
     color: maroon;
     text-rendering: optimizeLegibility;
 }
-
-
-
-
-
 
 
 @keyframes slide {
@@ -68,14 +63,16 @@ h1 {
     background: white;
     box-shadow: 8px 8px 0 rgba(0, 0, 0, 0.2);
 }
+
 .message {
-    font-size:1.1rem;
+    font-size: 1.1rem;
     margin-bottom: 1.6rem;
     margin-top: 0;
 }
+
 .btn {
-    color:inherit;
-    font-family:inherit;
+    color: inherit;
+    font-family: inherit;
     font-size: inherit;
     background: white;
     padding: 0.3rem 3.4rem;
@@ -137,7 +134,7 @@ h1 {
     transform: translateY(-4rem);
 }
 
-.plus{
+.plus {
     background-color: lightslategray;
     border: none;
     color: white;
@@ -147,4 +144,10 @@ h1 {
     font-size: 16px;
     margin: 4px 8px;
     border-radius: 8px;
+}
+
+.todo-list li {
+    display: flex;
+    justify-content: space-between;
+    width: 300px;
 }
