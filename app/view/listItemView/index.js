@@ -1,6 +1,5 @@
 export default class ListItemView {
   render(toDoItem) {
-    console.log(toDoItem);
     this.liElement = document.createElement('li');
     this.span = document.createElement('span');
     this.liElement.append(this.span);
