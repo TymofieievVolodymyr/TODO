@@ -27,7 +27,9 @@ export default class View {
     this.input = template.querySelector('input');
 
     model.todos.forEach(todo => {
-      const liItem = new ListItemView(todo);
+      const listItemInstance = new ListItemView();
+      const liItem = listItemInstance.render(todo);
+      //const liItem = new ListItemView(todo);
       this.todoList.append(liItem.liElement);
     });
 
@@ -44,7 +46,10 @@ export default class View {
 
   renderItemTodo(todo) {
     this.todoList = this.template.querySelector('.todo-list');
-    const liItem = new ListItemView(todo);
+    const listItemInstance = new ListItemView();
+    const liItem = listItemInstance.render(todo);
+
+    //const liItem = new ListItemView(todo);
     this.todoList.append(liItem.liElement);
   }
 
