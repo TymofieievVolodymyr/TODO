@@ -7,8 +7,9 @@ export default class ModalView {
     this.body = DOM.getElement(document, 'body');
   }
 
-  renderPopUp() {
+  renderPopUp(toDoItem) {
     DOM.addContentStart(this.body, modalTpl);
-    // 🥚 https://coub.com/view/1bqqd0
+    this.inputText = DOM.getElement(this.body, '.modal__input');
+    this.inputText.value = toDoItem.text;
   }
 }

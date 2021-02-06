@@ -25,7 +25,6 @@ export default class View {
 
     DOM.append(root, template);
     template.addEventListener('submit', event => {
-      console.log('submit')
       event.preventDefault();
       if (this.input.value !== '') {
         mediator.publish('addInput', this.input.value);
