@@ -1,5 +1,6 @@
 import DOM from "../../utilities/DOM";
 import {modalTpl} from "../modalTpl"
+import {mediator} from "../../root";
 
 
 export default class ModalView {
@@ -15,13 +16,15 @@ export default class ModalView {
     this.successButton = DOM.getElement(this.body, '.success');
     this.rejectButton = DOM.getElement(this.body, '.reject');
 
-    this.successButton.addEventListener('click', ()=>{
+    this.successButton.addEventListener('click', () => {
+      toDoItem.text = this.inputText.value
+      mediator.publish('editInput', toDoItem);
       DOM.removeNode(this.modal);
-    }, false)
+    }, false);
 
-    this.rejectButton.addEventListener('click', ()=>{
+    this.rejectButton.addEventListener('click', () => {
       DOM.removeNode(this.modal);
-    }, false)
+    }, false);
 
   }
 }

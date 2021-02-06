@@ -1,4 +1,5 @@
 import {mediator, storage} from "../root";
+import DOM from "../utilities/DOM";
 
 export default class Model {
   constructor() {
@@ -18,6 +19,16 @@ export default class Model {
 
     this.todos.push(todo);
     mediator.publish('listChanges', todo)
+    this.attach(this.todos);
+  }
+
+
+  editTodoItem(toDoItem) {
+    this.todos = this.todos.map((todo) => {
+      return todo.id === toDoItem.id ? toDoItem : todo
+    })
+
+    mediator.publish('fullList', this, DOM.getElement(document, '.wrapper'), DOM.getElement(document, '#root'));
     this.attach(this.todos);
   }
 }
