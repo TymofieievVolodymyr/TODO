@@ -23,7 +23,7 @@ export default class DOM {
   }
 
   static removeClassFromNode(node, className) {
-    node.classList.add(className);
+    node.classList.remove(className);
   }
 
   static lastChild(node) {
@@ -36,6 +36,10 @@ export default class DOM {
 
   static addContentEnd(targetElement, containerEl) {
     return targetElement.insertAdjacentHTML('beforeend', containerEl);
+  }
+
+  static removeNode(node) {
+    node.remove();
   }
 
 }

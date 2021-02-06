@@ -2,8 +2,8 @@ export const modalTpl = `
 <div class="modal">  
   <input type="text" class="modal__input">
   <div class="options">
-    <button class="btn">Yes</button>
-    <button class="btn">No</button>
+    <button class="btn success">Yes</button>
+    <button class="btn reject">No</button>
   </div>
 </div>
 `;
