@@ -12,18 +12,23 @@ export default class View {
 
   renderListTodo(model, template, root) {
 
-    DOM.addContentStart(template, formTpl);
-
+    if (root) {
+      DOM.addContentStart(template, formTpl);
+      DOM.append(root, template);
+    }
     this.todoList = DOM.getElement(template, '.todo-list');
-    this.input = DOM.getElement(template, 'input');
 
+    while (this.todoList.firstChild) {
+      DOM.removeNode(this.todoList.firstChild);
+    }
 
     model.todos.forEach(todo => {
       const liItem = ListItemView.render(todo, template);
       DOM.append(this.todoList, liItem.liElement);
     });
 
-    DOM.append(root, template);
+    this.input = DOM.getElement(template, 'input');
+
     template.addEventListener('submit', event => {
       event.preventDefault();
       if (this.input.value !== '') {

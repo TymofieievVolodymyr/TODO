@@ -18,7 +18,7 @@ export default class Model {
     }
 
     this.todos.push(todo);
-    mediator.publish('listChanges', todo)
+    mediator.publish('listChanges', todo);
     this.attach(this.todos);
   }
 
@@ -26,9 +26,9 @@ export default class Model {
   editTodoItem(toDoItem) {
     this.todos = this.todos.map((todo) => {
       return todo.id === toDoItem.id ? toDoItem : todo
-    })
+    });
 
-    mediator.publish('fullList', this, DOM.getElement(document, '.wrapper'), DOM.getElement(document, '#root'));
+    mediator.publish('fullList', this, DOM.getElement(document, '.wrapper'));
     this.attach(this.todos);
   }
 }
