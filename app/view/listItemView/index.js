@@ -19,10 +19,16 @@ export default class ListItemView {
     this.spanItemNextDay = DOM.getElement(this.liElement, '.tomorrow');
     this.spanItemNextDay.textContent = toDoItem.expirationDate;
 
+    this.deleteButton = DOM.getElement(this.liElement, '.delete');
+    this.deleteButton.addEventListener('click', () => {
+      mediator.publish('delete', toDoItem)
+    }, false);
+
+
     this.button = DOM.getElement(this.liElement, '.plus');
     this.button.addEventListener('click', () => {
       mediator.publish('showModal', toDoItem);
-    })
+    });
 
     this.checkbox = DOM.getElement(this.liElement, '.input__checkbox');
 
