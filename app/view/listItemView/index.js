@@ -4,7 +4,6 @@ import {itemTpl} from "../itemTpl"
 
 export default class ListItemView {
   static render(toDoItem, template) {
-    //console.log(template);
     this.ulElement = DOM.getElement(template, '.todo-list');
     DOM.addContentEnd(this.ulElement, itemTpl);
     this.liElement = DOM.lastChild(this.ulElement);
