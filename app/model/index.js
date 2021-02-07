@@ -23,7 +23,6 @@ export default class Model {
       creationDate: thisDay(new Date()),
       expirationDate: tomorrow(new Date()),
     }
-    console.log(todo);
     this.todos.push(todo);
     mediator.publish('listChanges', todo);
     this.attach(this.todos);
