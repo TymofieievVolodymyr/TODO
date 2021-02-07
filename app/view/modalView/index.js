@@ -20,7 +20,9 @@ export default class ModalView {
     this.rejectButton = DOM.getElement(this.body, '.reject');
 
     this.currentDate = DOM.getElement(this.body, '.creation');
+    this.currentDate.value = toDoItem.creationDate;
     this.expirationDate = DOM.getElement(this.body, '.expiration');
+    this.expirationDate.value = toDoItem.expirationDate;
 
     this.inputText.addEventListener('keydown', () => {
       DOM.removeClassFromNode(this.inputText, 'invalid_input');
