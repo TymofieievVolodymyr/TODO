@@ -131,6 +131,8 @@ h1 {
     transition: all 0.3s;
 }
 
+
+
 .modal__input {
     color: #333;
     font-size: 1.2rem;
@@ -141,6 +143,11 @@ h1 {
     border: none;
     width: 90%;
     display: block;
+}
+
+.invalid_input {
+    border: 1px solid red;
+    background-color: #f6c1c1;
 }
 
 .form__input:placeholder-shown + .form__label {

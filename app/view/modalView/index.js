@@ -16,15 +16,45 @@ export default class ModalView {
     this.successButton = DOM.getElement(this.body, '.success');
     this.rejectButton = DOM.getElement(this.body, '.reject');
 
-    this.successButton.addEventListener('click', () => {
-      toDoItem.text = this.inputText.value
-      mediator.publish('editInput', toDoItem);
-      DOM.removeNode(this.modal);
+    function inputVerifier(event) {
+      const regex = new RegExp("^[a-zA-Z0-9]+$");
+      let key = String.fromCharCode(!event.charCode ? event.which : event.charCode);
+      return regex.test(key);
+    }
+
+    const saveListener = (character) => {
+      this.successButton.addEventListener('click', () => {
+        console.log(character);
+        if (character) {
+          toDoItem.text = this.inputText.value;
+          mediator.publish('editInput', toDoItem);
+          DOM.removeNode(this.modal);
+        } else {
+          DOM.addClassToNode(this.inputText, 'invalid_input');
+        }
+
+      }, false);
+    }
+
+    this.inputText.addEventListener('keypress', event => {
+      let characterVerifier = inputVerifier(event);
+      console.log(characterVerifier);
+      saveListener(characterVerifier)
     }, false);
+
+    // this.successButton.addEventListener('click', () => {
+    //   if (characterVerifier) {
+    //     toDoItem.text = this.inputText.value;
+    //     mediator.publish('editInput', toDoItem);
+    //     DOM.removeNode(this.modal);
+    //   } else {
+    //     DOM.addClassToNode(this.inputText, 'invalid_input');
+    //   }
+    //
+    // }, false);
 
     this.rejectButton.addEventListener('click', () => {
       DOM.removeNode(this.modal);
     }, false);
-
   }
 }
