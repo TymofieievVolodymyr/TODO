@@ -182,8 +182,12 @@ h1 {
 }
 
 .todo-list li span {
-    color: maroon;
     font-weight: bold;
+}
+
+.done{
+    text-decoration: line-through;
+    color: lightslategray;
 }
 
 

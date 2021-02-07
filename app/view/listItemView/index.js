@@ -3,7 +3,7 @@ import {mediator} from "../../root";
 import {itemTpl} from "../itemTpl"
 
 export default class ListItemView {
-  static render(toDoItem, template) {
+   render(toDoItem, template) {
     this.ulElement = DOM.getElement(template, '.todo-list');
     DOM.addContentEnd(this.ulElement, itemTpl);
 
@@ -23,6 +23,12 @@ export default class ListItemView {
     this.button.addEventListener('click', () => {
       mediator.publish('showModal', toDoItem);
     })
+
+    this.checkbox = DOM.getElement(this.liElement, '.input__checkbox');
+    this.checkbox.addEventListener('click', () => {
+      console.log(this.liElement.id);
+      DOM.addClassToNode(this.liElement, 'done');
+    }, false);
 
     return this;
   }
