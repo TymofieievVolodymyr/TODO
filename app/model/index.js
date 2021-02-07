@@ -3,6 +3,7 @@ import DOM from "../utilities/DOM";
 import formatDate from "../utilities/formatDate";
 import {nextDayDate} from "../utilities/formatDate";
 import {compose} from "../utilities/compose";
+
 const thisDay = compose(formatDate);
 const tomorrow = compose(formatDate, nextDayDate);
 
@@ -22,6 +23,7 @@ export default class Model {
       text: todoText,
       creationDate: thisDay(new Date()),
       expirationDate: tomorrow(new Date()),
+      done: false,
     }
     this.todos.push(todo);
     mediator.publish('listChanges', todo);
@@ -33,6 +35,15 @@ export default class Model {
       return todo.id === toDoItem.id ? toDoItem : todo
     });
 
+    mediator.publish('fullList', this, DOM.getElement(document, '.wrapper'));
+    this.attach(this.todos);
+  }
+
+  toggleDone(toDoItem) {
+    this.todos = this.todos.map((todo) => {
+      return todo.id === toDoItem.id ? {...toDoItem, done: !toDoItem.done} : todo
+
+    });
     mediator.publish('fullList', this, DOM.getElement(document, '.wrapper'));
     this.attach(this.todos);
   }
