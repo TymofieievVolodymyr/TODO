@@ -9,9 +9,11 @@ export default class View {
     this.app = DOM.getElement(document, '#root');
     this.template = DOM.createElement('div', 'wrapper');
   }
+  testMethod(model) {
+    console.log(model);
+  }
 
   renderListTodo(model, template, root) {
-
     if (root) {
       DOM.addContentStart(template, formTpl);
       DOM.append(root, template);
@@ -26,10 +28,11 @@ export default class View {
       const liItemInstance = new ListItemView();
       const liItem = liItemInstance.render(todo, template);
       DOM.append(this.todoList, liItem.liElement);
+
     });
 
     this.input = DOM.getElement(template, 'input');
-    this.plusButton = DOM.getElement(template,'.add__item');
+    this.plusButton = DOM.getElement(template, '.add__item');
 
     this.plusButton.addEventListener('click', event => {
       event.preventDefault();
@@ -38,6 +41,8 @@ export default class View {
         this.input.value = '';
       }
     });
+    //this.testMethod(model.todos[0]);
+
   }
 
   renderItemTodo(todo) {
@@ -45,6 +50,7 @@ export default class View {
     const liItemInstance = new ListItemView();
     const liItem = liItemInstance.render(todo, this.template);
     DOM.append(this.todoList, liItem.liElement);
+    this.testMethod(todo);
   }
 
 }

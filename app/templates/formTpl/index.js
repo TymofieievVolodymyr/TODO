@@ -10,7 +10,8 @@ export const formTpl = `
   </ul>
   <footer class="footer">
   <ul class="filter">
-    <li><a class="all">All</a></li>
+    <li class="left"></li>
+    <li><a class="all">all</a></li>
     <li><a class="active">Active</a></li>
     <li><a class="completed">Completed</a></li>
     <li><a class="clear-completed">Clear Completed</a></li>
