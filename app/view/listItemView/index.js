@@ -25,7 +25,7 @@ export default class ListItemView {
     }, false);
 
 
-    this.button = DOM.getElement(this.liElement, '.plus');
+    this.button = DOM.getElement(this.liElement, '.pencil');
     this.button.addEventListener('click', () => {
       mediator.publish('showModal', toDoItem);
     });

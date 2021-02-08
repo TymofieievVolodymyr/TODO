@@ -157,8 +157,8 @@ h1 {
     transform: translateY(-4rem);
 }
 
-.plus {
-    background-color: lightslategray;
+.pencil {
+    background-color: #CCCCFF;
     border: none;
     color: white;
     text-align: center;
