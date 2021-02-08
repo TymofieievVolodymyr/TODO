@@ -1,5 +1,5 @@
 import DOM from "../../utilities/DOM";
-import {modalTpl} from "../modalTpl"
+import {modalTpl} from "../../Templates/modalTpl"
 import {mediator} from "../../root";
 import inputVerifier from "../../utilities/inputVerifier";
 

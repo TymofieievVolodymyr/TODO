@@ -1,5 +1,5 @@
 import ListItemView from "./listItemView";
-import {formTpl} from "./formTpl";
+import {formTpl} from "../Templates/formTpl";
 import {mediator} from "../root";
 import DOM from '../utilities/DOM'
 
