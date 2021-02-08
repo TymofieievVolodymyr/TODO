@@ -47,6 +47,23 @@ export default class ListItemView {
       DOM.addClassToNode(this.liElement, 'done');
     }, false);
 
+    this.checkbox = DOM.getElement(this.liElement, '.input__checkbox');
+
+    if (toDoItem.done === true) {
+      DOM.addClassToNode(this.liElement, 'done');
+      this.checkbox.checked = true;
+    }
+
+    if (toDoItem.done === false) {
+      DOM.removeClassFromNode(this.liElement, 'done');
+      this.checkbox.checked = false;
+    }
+
+    this.checkbox.addEventListener('click', () => {
+      mediator.publish('toggleComplete', toDoItem);
+      DOM.addClassToNode(this.liElement, 'done');
+    }, false);
+
     return this;
   }
 }

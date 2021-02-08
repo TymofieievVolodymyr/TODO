@@ -16,6 +16,7 @@ export default class Controller {
     mediator.subscribe('showInitialModal', this.modalWindow.renderInitModal.bind(this.modalWindow));
     mediator.subscribe('toggleComplete', this.model.toggleDone.bind(this.model));
     mediator.subscribe('delete', this.model.deleteItem.bind(this.model));
+
   }
 
 }
