@@ -3,10 +3,9 @@ import DOM from "../utilities/DOM";
 import formatDate from "../utilities/formatDate";
 import {nextDayDate} from "../utilities/formatDate";
 import {compose} from "../utilities/compose";
-
-const thisDay = compose(formatDate);
-const tomorrow = compose(formatDate, nextDayDate);
-
+const getToday = compose(formatDate);
+const getTomorrow = compose(formatDate, nextDayDate);
+console.log(getTomorrow());
 export default class Model {
   constructor() {
     this.todos = JSON.parse(storage.getItem('todos')) ?? [];
@@ -21,12 +20,12 @@ export default class Model {
     const todo = {
       id: this.todos.length > 0 ? this.todos[this.todos.length - 1].id + 1 : 1,
       text: todoText,
-      creationDate: thisDay(new Date()),
-      expirationDate: tomorrow(new Date()),
-      done: false,
+      creationDate: getToday(),
+      expirationDate: getTomorrow(),
     }
+    console.log(todo);
     this.todos.push(todo);
-    mediator.publish('listChanges', todo);
+    mediator.publish('showInitialModal', todo);
     this.attach(this.todos);
   }
 
@@ -35,15 +34,6 @@ export default class Model {
       return todo.id === toDoItem.id ? toDoItem : todo
     });
 
-    mediator.publish('fullList', this, DOM.getElement(document, '.wrapper'));
-    this.attach(this.todos);
-  }
-
-  toggleDone(toDoItem) {
-    this.todos = this.todos.map((todo) => {
-      return todo.id === toDoItem.id ? {...toDoItem, done: !toDoItem.done} : todo
-
-    });
     mediator.publish('fullList', this, DOM.getElement(document, '.wrapper'));
     this.attach(this.todos);
   }
