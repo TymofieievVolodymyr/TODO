@@ -1,4 +1,10 @@
 import {mediator, storage} from "../root";
+import DOM from "../utilities/DOM";
+import formatDate from "../utilities/formatDate";
+import {nextDayDate} from "../utilities/formatDate";
+import {compose} from "../utilities/compose";
+const getToday = compose(formatDate);
+const getTomorrow = compose(formatDate, nextDayDate);
 
 export default class Model {
   constructor() {
@@ -14,10 +20,20 @@ export default class Model {
     const todo = {
       id: this.todos.length > 0 ? this.todos[this.todos.length - 1].id + 1 : 1,
       text: todoText,
+      creationDate: getToday(),
+      expirationDate: getTomorrow(),
     }
-
     this.todos.push(todo);
-    mediator.publish('listChanges', todo)
+    mediator.publish('showInitialModal', todo);
+    this.attach(this.todos);
+  }
+
+  editTodoItem(toDoItem) {
+    this.todos = this.todos.map((todo) => {
+      return todo.id === toDoItem.id ? toDoItem : todo
+    });
+
+    mediator.publish('fullList', this, DOM.getElement(document, '.wrapper'));
     this.attach(this.todos);
   }
 }
