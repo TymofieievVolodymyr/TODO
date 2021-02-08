@@ -1,6 +1,6 @@
 import DOM from "../../utilities/DOM";
 import {mediator} from "../../root";
-import {itemTpl} from "../../Templates/itemTpl"
+import {itemTpl} from "../../templates/itemTpl"
 
 export default class ListItemView {
   static render(toDoItem, template) {

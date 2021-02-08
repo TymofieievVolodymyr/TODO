@@ -1,5 +1,5 @@
 import DOM from "../../utilities/DOM";
-import {modalTpl} from "../../Templates/modalTpl"
+import {modalTpl} from "../../templates/modalTpl"
 import inputVerifier from "../../utilities/inputVerifier";
 import {getEditEvent, getListChangesEvent} from "../../utilities/eventsHelper";
 
