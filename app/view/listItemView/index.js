@@ -20,11 +20,19 @@ export default class ListItemView {
     this.spanItemNextDay.textContent = toDoItem.expirationDate;
 
     this.deleteButton = DOM.getElement(this.liElement, '.delete');
+
+    this.attachListenersAndCheckDone(toDoItem);
+
+    return this;
+  }
+
+  attachListenersAndCheckDone(toDoItem) {
     this.deleteButton.addEventListener('click', () => {
       mediator.publish('delete', toDoItem)
     }, false);
 
     this.button = DOM.getElement(this.liElement, '.plus');
+
     this.button.addEventListener('click', () => {
       mediator.publish('showModal', toDoItem);
     });
@@ -45,7 +53,5 @@ export default class ListItemView {
       mediator.publish('toggleComplete', toDoItem);
       DOM.addClassToNode(this.liElement, 'done');
     }, false);
-
-    return this;
   }
 }
