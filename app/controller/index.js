@@ -14,6 +14,7 @@ export default class Controller {
     mediator.subscribe('listChanges', this.view.renderItemTodo.bind(this.view));
     mediator.subscribe('showModal', this.modalWindow.renderPopUp.bind(this.modalWindow));
     mediator.subscribe('showInitialModal', this.modalWindow.renderInitModal.bind(this.modalWindow));
+    mediator.subscribe('delete', this.model.deleteItem.bind(this.model));
   }
 
 }

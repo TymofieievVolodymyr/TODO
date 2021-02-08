@@ -36,4 +36,12 @@ export default class Model {
     mediator.publish('fullList', this, DOM.getElement(document, '.wrapper'));
     this.attach(this.todos);
   }
+
+  deleteItem(toDoItem) {
+    this.todos = this.todos.filter((todo) => {
+      return todo.id !== toDoItem.id;
+    });
+    mediator.publish('fullList', this, DOM.getElement(document, '.wrapper'));
+    this.attach(this.todos);
+  }
 }
