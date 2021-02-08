@@ -1,7 +1,7 @@
 import DOM from "../../utilities/DOM";
-import {modalTpl} from "../modalTpl"
-import {mediator} from "../../root";
+import {modalTpl} from "../../templates/modalTpl"
 import inputVerifier from "../../utilities/inputVerifier";
+import {getEditEvent, getListChangesEvent} from "../../utilities/eventsHelper";
 
 
 export default class ModalView {
@@ -9,7 +9,7 @@ export default class ModalView {
     this.body = DOM.getElement(document, 'body');
   }
 
-  renderPopUp(toDoItem) {
+  queryElementAndAssignData(toDoItem) {
     DOM.addContentStart(this.body, modalTpl);
     this.modal = DOM.getElement(this.body, '.modal');
 
@@ -23,9 +23,15 @@ export default class ModalView {
     this.currentDate.value = toDoItem.creationDate;
     this.expirationDate = DOM.getElement(this.body, '.expiration');
     this.expirationDate.value = toDoItem.expirationDate;
+  }
 
+  attachListenersAndFireEvent(toDoItem, eventTypeCallback) {
     this.inputText.addEventListener('keydown', () => {
       DOM.removeClassFromNode(this.inputText, 'invalid_input');
+    }, false);
+
+    this.rejectButton.addEventListener('click', () => {
+      DOM.removeNode(this.modal);
     }, false);
 
     this.successButton.addEventListener('click', () => {
@@ -35,15 +41,23 @@ export default class ModalView {
         toDoItem.creationDate = this.currentDate.value;
         toDoItem.expirationDate = this.expirationDate.value;
 
-        mediator.publish('editInput', toDoItem);
+        eventTypeCallback(toDoItem);
+
         DOM.removeNode(this.modal);
       } else {
         DOM.addClassToNode(this.inputText, 'invalid_input');
       }
     }, false);
-
-    this.rejectButton.addEventListener('click', () => {
-      DOM.removeNode(this.modal);
-    }, false);
   }
+
+  renderPopUp(toDoItem) {
+    this.queryElementAndAssignData(toDoItem);
+    this.attachListenersAndFireEvent(toDoItem, getEditEvent);
+  }
+
+  renderInitModal(toDoItem) {
+    this.queryElementAndAssignData(toDoItem);
+    this.attachListenersAndFireEvent(toDoItem, getListChangesEvent);
+  }
+
 }

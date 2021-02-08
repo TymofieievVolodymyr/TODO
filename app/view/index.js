@@ -1,5 +1,5 @@
 import ListItemView from "./listItemView";
-import {formTpl} from "./formTpl";
+import {formTpl} from "../templates/formTpl";
 import {mediator} from "../root";
 import DOM from '../utilities/DOM'
 
@@ -29,8 +29,9 @@ export default class View {
     });
 
     this.input = DOM.getElement(template, 'input');
+    this.plusButton = DOM.getElement(template,'.add__item');
 
-    template.addEventListener('submit', event => {
+    this.plusButton.addEventListener('click', event => {
       event.preventDefault();
       if (this.input.value !== '') {
         mediator.publish('addInput', this.input.value);
