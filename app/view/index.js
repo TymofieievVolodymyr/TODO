@@ -33,7 +33,6 @@ export default class View {
     this.plusButton.addEventListener('click', event => {
       event.preventDefault();
       if (this.input.value !== '') {
-        //mediator.publish('showEmptyModal');
         mediator.publish('addInput', this.input.value);
         this.input.value = '';
       }
