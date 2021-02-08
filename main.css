@@ -13,9 +13,7 @@ html {
 body {
     color: black;
     font-family: "Questrial", sans-serif;
-    background-image: url("img/back1.jpg");
-    background-repeat: no-repeat;
-    background-size: 100%;
+    background-color: #CCCCFF;
 }
 
 #root {
@@ -188,8 +186,12 @@ h1 {
 }
 
 .todo-list li span {
-    color: maroon;
     font-weight: bold;
+}
+
+.done{
+    text-decoration: line-through;
+    color: lightslategray;
 }
 
 

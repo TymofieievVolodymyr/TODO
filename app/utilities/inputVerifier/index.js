@@ -4,4 +4,3 @@ export default function inputVerifier(inputString) {
   return inputCharacters.every(char => regex.test(char));
 }
 
-// 🥚 https://www.youtube.com/watch?t=2&v=Ca2r54SDb20&feature=youtu.be

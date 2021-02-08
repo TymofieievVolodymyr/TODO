@@ -23,7 +23,8 @@ export default class View {
     }
 
     model.todos.forEach(todo => {
-      const liItem = ListItemView.render(todo, template);
+      const liItemInstance = new ListItemView();
+      const liItem = liItemInstance.render(todo, template);
       DOM.append(this.todoList, liItem.liElement);
     });
 
@@ -41,7 +42,8 @@ export default class View {
 
   renderItemTodo(todo) {
     this.todoList = DOM.getElement(this.template, '.todo-list');
-    const liItem = ListItemView.render(todo, this.template);
+    const liItemInstance = new ListItemView();
+    const liItem = liItemInstance.render(todo, this.template);
     DOM.append(this.todoList, liItem.liElement);
   }
 
