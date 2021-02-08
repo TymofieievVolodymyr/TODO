@@ -3,8 +3,8 @@ import DOM from "../utilities/DOM";
 import formatDate from "../utilities/formatDate";
 import {nextDayDate} from "../utilities/formatDate";
 import {compose} from "../utilities/compose";
-const thisDay = compose(formatDate);
-const tomorrow = compose(formatDate, nextDayDate);
+const getToday = compose(formatDate);
+const getTomorrow = compose(formatDate, nextDayDate);
 
 export default class Model {
   constructor() {
@@ -20,8 +20,8 @@ export default class Model {
     const todo = {
       id: this.todos.length > 0 ? this.todos[this.todos.length - 1].id + 1 : 1,
       text: todoText,
-      creationDate: thisDay(new Date()),
-      expirationDate: tomorrow(new Date()),
+      creationDate: getToday(),
+      expirationDate: getTomorrow(),
     }
     this.todos.push(todo);
     mediator.publish('listChanges', todo);

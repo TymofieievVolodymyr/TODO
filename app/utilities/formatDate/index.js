@@ -1,21 +1,21 @@
-export default function formatDate(date) {
-  let d = new Date(date);
+export default function formatDate() {
+  let d = new Date();
   let month = '' + (d.getMonth() + 1);
   let day = '' + d.getDate();
   let year = d.getFullYear();
 
-  if (month.length < 2){
+  if (month.length < 2) {
     month = '0' + month;
   }
-  if (day.length < 2){
+  if (day.length < 2) {
     day = '0' + day;
   }
 
   return [year, month, day].join('-');
 }
 
-export function nextDayDate(todayDate){
-  const  date = todayDate;
+export function nextDayDate() {
+  const date = new Date();
   return date.setDate(date.getDate() + 1);
 }
 
