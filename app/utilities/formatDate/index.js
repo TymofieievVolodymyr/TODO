@@ -1,5 +1,5 @@
-export default function formatDate() {
-  let d = new Date();
+export default function formatDate(date) {
+  let d = date ?? new Date();
   let month = '' + (d.getMonth() + 1);
   let day = '' + d.getDate();
   let year = d.getFullYear();
@@ -16,7 +16,9 @@ export default function formatDate() {
 
 export function nextDayDate() {
   const date = new Date();
-  return date.setDate(date.getDate() + 1);
+   date.setDate(date.getDate() + 1);
+   console.log(date);
+  return date;
 }
 
 
