@@ -32,7 +32,6 @@ export default class Model {
     this.todos = this.todos.map((todo) => {
       return todo.id === toDoItem.id ? toDoItem : todo
     });
-
     mediator.publish('fullList', this, DOM.getElement(document, '.wrapper'));
     this.attach(this.todos);
   }

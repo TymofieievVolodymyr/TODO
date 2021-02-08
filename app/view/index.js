@@ -3,20 +3,16 @@ import {formTpl} from "../templates/formTpl";
 import {mediator} from "../root";
 import DOM from '../utilities/DOM'
 
-
 export default class View {
   constructor() {
     this.app = DOM.getElement(document, '#root');
     this.template = DOM.createElement('div', 'wrapper');
   }
-  testMethod(model) {
-    console.log(model);
-  }
 
-  renderListTodo(model, template, root) {
-    if (root) {
+  renderListTodo(model, template, view) {
+    if (view?.app) {
       DOM.addContentStart(template, formTpl);
-      DOM.append(root, template);
+      DOM.append(view.app, template);
     }
     this.todoList = DOM.getElement(template, '.todo-list');
 
@@ -31,18 +27,23 @@ export default class View {
 
     });
 
-    this.input = DOM.getElement(template, 'input');
     this.plusButton = DOM.getElement(template, '.add__item');
+    this.input = DOM.getElement(template, 'input');
 
-    this.plusButton.addEventListener('click', event => {
+    if (view?.app) {
+      view.attachListener(this.plusButton, this.input);
+    }
+
+  }
+
+  attachListener(button, input) {
+    button.addEventListener('click', event => {
       event.preventDefault();
-      if (this.input.value !== '') {
-        mediator.publish('addInput', this.input.value);
-        this.input.value = '';
+      if (input.value !== '') {
+        mediator.publish('addInput', input.value);
+        input.value = '';
       }
     });
-    //this.testMethod(model.todos[0]);
-
   }
 
   renderItemTodo(todo) {
@@ -50,7 +51,6 @@ export default class View {
     const liItemInstance = new ListItemView();
     const liItem = liItemInstance.render(todo, this.template);
     DOM.append(this.todoList, liItem.liElement);
-    this.testMethod(todo);
   }
 
 }
