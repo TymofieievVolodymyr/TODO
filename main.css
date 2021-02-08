@@ -169,6 +169,18 @@ h1 {
     border-radius: 8px;
 }
 
+.delete {
+    background-color: lightsalmon;
+    border: none;
+    color: white;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 0 8px;
+    border-radius: 8px;
+}
+
 .todo-list {
     padding-left: 0;
 }

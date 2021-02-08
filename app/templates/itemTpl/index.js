@@ -5,6 +5,7 @@ export const itemTpl = `
   Creation date<span class="currentDay"></span>
   Expiration date<span class="tomorrow"></span>
   <button class="plus">+</button>
+  <button class="delete">x</button>
 </li>
 `;
 
