@@ -9,11 +9,7 @@ export default class View {
     this.template = DOM.createElement('div', 'wrapper');
   }
 
-  renderListTodo(model, template, view) {
-    if (view?.app) {
-      DOM.addContentStart(template, formTpl);
-      DOM.append(view.app, template);
-    }
+  reRenderTodo(model, template) {
     this.todoList = DOM.getElement(template, '.todo-list');
 
     while (this.todoList.firstChild) {
@@ -24,16 +20,21 @@ export default class View {
       const liItemInstance = new ListItemView();
       const liItem = liItemInstance.render(todo, template);
       DOM.append(this.todoList, liItem.liElement);
-
     });
+  }
 
-    this.plusButton = DOM.getElement(template, '.add__item');
-    this.input = DOM.getElement(template, 'input');
+  renderListTodo(model, template, view) {
+      DOM.addContentStart(template, formTpl);
+      DOM.append(view.app, template);
 
-    if (view?.app) {
-      view.attachListener(this.plusButton, this.input);
-    }
+    const {todoList, plusButton, input} = view.queryElement(template);
 
+    model.todos.forEach(todo => {
+      const liItemInstance = new ListItemView();
+      const liItem = liItemInstance.render(todo, template);
+      DOM.append(todoList, liItem.liElement);
+    });
+    view.attachListener(plusButton, input);
   }
 
   attachListener(button, input) {
@@ -46,11 +47,17 @@ export default class View {
     });
   }
 
+  queryElement(template) {
+    let todoList = DOM.getElement(template, '.todo-list');
+    let plusButton = DOM.getElement(template, '.add__item');
+    let input = DOM.getElement(template, 'input');
+    return {todoList, plusButton, input};
+  }
+
   renderItemTodo(todo) {
     this.todoList = DOM.getElement(this.template, '.todo-list');
     const liItemInstance = new ListItemView();
     const liItem = liItemInstance.render(todo, this.template);
     DOM.append(this.todoList, liItem.liElement);
   }
-
 }

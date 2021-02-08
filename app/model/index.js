@@ -32,7 +32,7 @@ export default class Model {
     this.todos = this.todos.map((todo) => {
       return todo.id === toDoItem.id ? toDoItem : todo
     });
-    mediator.publish('fullList', this, DOM.getElement(document, '.wrapper'));
+    mediator.publish('reRenderFullList', this, DOM.getElement(document, '.wrapper'));
     this.attach(this.todos);
   }
 
@@ -40,7 +40,8 @@ export default class Model {
     this.todos = this.todos.map((todo) => {
       return todo.id === toDoItem.id ? {...toDoItem, done: !toDoItem.done} : todo
     });
-    mediator.publish('fullList', this, DOM.getElement(document, '.wrapper'));
+
+    mediator.publish('reRenderFullList', this, DOM.getElement(document, '.wrapper'));
     this.attach(this.todos);
   }
 
@@ -48,7 +49,8 @@ export default class Model {
     this.todos = this.todos.filter((todo) => {
       return todo.id !== toDoItem.id;
     });
-    mediator.publish('fullList', this, DOM.getElement(document, '.wrapper'));
+
+    mediator.publish('reRenderFullList', this, DOM.getElement(document, '.wrapper'));
     this.attach(this.todos);
   }
 }

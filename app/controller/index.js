@@ -9,6 +9,7 @@ export default class Controller {
 
     mediator.subscribe('fullList', this.view.renderListTodo.bind(this.model.todos));
     mediator.publish('fullList', this.model, this.view.template, this.view);
+    mediator.subscribe('reRenderFullList', this.view.reRenderTodo.bind(this.model.todos));
     mediator.subscribe('addInput', this.model.addTodoItem.bind(this.model));
     mediator.subscribe('editInput', this.model.editTodoItem.bind(this.model));
     mediator.subscribe('listChanges', this.view.renderItemTodo.bind(this.view));
@@ -16,7 +17,6 @@ export default class Controller {
     mediator.subscribe('showInitialModal', this.modalWindow.renderInitModal.bind(this.modalWindow));
     mediator.subscribe('toggleComplete', this.model.toggleDone.bind(this.model));
     mediator.subscribe('delete', this.model.deleteItem.bind(this.model));
-
   }
 
 }
