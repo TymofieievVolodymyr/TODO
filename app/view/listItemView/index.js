@@ -1,6 +1,6 @@
 import DOM from "../../utilities/DOM";
 import {mediator} from "../../root";
-import {itemTpl} from "../itemTpl"
+import {itemTpl} from "../../templates/itemTpl"
 
 export default class ListItemView {
   render(toDoItem, template) {
@@ -23,7 +23,6 @@ export default class ListItemView {
     this.deleteButton.addEventListener('click', () => {
       mediator.publish('delete', toDoItem)
     }, false);
-
 
     this.button = DOM.getElement(this.liElement, '.plus');
     this.button.addEventListener('click', () => {

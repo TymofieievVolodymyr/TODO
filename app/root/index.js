@@ -11,7 +11,6 @@ export const storage = new SaveToLocalStorage();
 
 export default class App {
   render() {
-    //new Controller(new Model(), new View())
     new Controller(new Model(), new View(), new ModalView())
   }
 }

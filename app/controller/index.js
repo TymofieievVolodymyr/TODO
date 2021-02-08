@@ -13,8 +13,10 @@ export default class Controller {
     mediator.subscribe('editInput', this.model.editTodoItem.bind(this.model));
     mediator.subscribe('listChanges', this.view.renderItemTodo.bind(this.view));
     mediator.subscribe('showModal', this.modalWindow.renderPopUp.bind(this.modalWindow));
+    mediator.subscribe('showInitialModal', this.modalWindow.renderInitModal.bind(this.modalWindow));
     mediator.subscribe('toggleComplete', this.model.toggleDone.bind(this.model));
     mediator.subscribe('delete', this.model.deleteItem.bind(this.model));
+
   }
 
 }

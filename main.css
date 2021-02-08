@@ -123,10 +123,14 @@ h1 {
     border-radius: 0.2rem;
     background-color: rgb(255, 255, 255);
     border: none;
-    width: 90%;
-    display: block;
+    width: 85%;
     border-bottom: 0.3rem solid transparent;
     transition: all 0.3s;
+}
+
+.add__item {
+    padding: 26px;
+    border-radius: 5px;
 }
 
 .modal__input {
@@ -197,7 +201,7 @@ h1 {
     font-weight: bold;
 }
 
-.done {
+.done{
     text-decoration: line-through;
     color: lightslategray;
 }
