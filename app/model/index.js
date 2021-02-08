@@ -5,7 +5,7 @@ import {nextDayDate} from "../utilities/formatDate";
 import {compose} from "../utilities/compose";
 const getToday = compose(formatDate);
 const getTomorrow = compose(formatDate, nextDayDate);
-console.log(getTomorrow());
+
 export default class Model {
   constructor() {
     this.todos = JSON.parse(storage.getItem('todos')) ?? [];
@@ -23,7 +23,6 @@ export default class Model {
       creationDate: getToday(),
       expirationDate: getTomorrow(),
     }
-    console.log(todo);
     this.todos.push(todo);
     mediator.publish('showInitialModal', todo);
     this.attach(this.todos);
@@ -34,6 +33,15 @@ export default class Model {
       return todo.id === toDoItem.id ? toDoItem : todo
     });
 
+    mediator.publish('fullList', this, DOM.getElement(document, '.wrapper'));
+    this.attach(this.todos);
+  }
+
+  toggleDone(toDoItem) {
+    this.todos = this.todos.map((todo) => {
+      return todo.id === toDoItem.id ? {...toDoItem, done: !toDoItem.done} : todo
+
+    });
     mediator.publish('fullList', this, DOM.getElement(document, '.wrapper'));
     this.attach(this.todos);
   }
