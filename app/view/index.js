@@ -28,10 +28,12 @@ export default class View {
     });
 
     this.input = DOM.getElement(template, 'input');
+    this.plusButton = DOM.getElement(template,'.add__item');
 
-    template.addEventListener('submit', event => {
+    this.plusButton.addEventListener('click', event => {
       event.preventDefault();
       if (this.input.value !== '') {
+        //mediator.publish('showEmptyModal');
         mediator.publish('addInput', this.input.value);
         this.input.value = '';
       }

@@ -24,7 +24,7 @@ export default class Model {
       expirationDate: getTomorrow(),
     }
     this.todos.push(todo);
-    mediator.publish('listChanges', todo);
+    mediator.publish('showInitialModal', todo);
     this.attach(this.todos);
   }
 
