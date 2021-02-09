@@ -16,6 +16,7 @@ export default class Controller {
     mediator.subscribe('toggleComplete', this.model.toggleDone.bind(this.model));
     mediator.subscribe('delete', this.model.deleteItem.bind(this.model));
     mediator.subscribe('saveLeftItems', this.model.saveLeftItems.bind(this.model));
+    mediator.subscribe('noItems', this.view.renderNoItems.bind(this.model));
   }
 }
 

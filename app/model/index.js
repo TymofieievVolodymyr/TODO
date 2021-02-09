@@ -24,8 +24,9 @@ export default class Model {
       text: todoText,
       creationDate: getToday(),
       expirationDate: getTomorrow(),
-      leftItems: 0,
+      leftItems: null,
     }
+
     this.todos.push(todo);
     mediator.publish('showModal', todo);
     this.attach(this.todos);
@@ -55,12 +56,14 @@ export default class Model {
 
     mediator.publish('reRenderFullList', this, DOM.getElement(document, '.wrapper'), this.view);
     this.attach(this.todos);
+    if (this.todos.length === 0) {
+      mediator.publish('noItems', 'No items', this.view);
+    }
   }
 
-  saveLeftItems(itemsLeft, toDoItem) {
+  saveLeftItems(itemsLeft = 'No items', toDoItem) {
     this.todos = this.todos.map((todo) => {
-      return  todo.id === toDoItem.id ? {...toDoItem, leftItems: itemsLeft} : todo
+      return todo.id === toDoItem.id ? {...toDoItem, leftItems: itemsLeft} : todo
     });
-
   }
 }

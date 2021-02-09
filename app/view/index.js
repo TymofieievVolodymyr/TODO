@@ -20,7 +20,7 @@ export default class View {
       const liItemInstance = new ListItemView();
       const liItem = liItemInstance.render(todo, template);
       DOM.append(this.todoList, liItem.liElement);
-     view.renderActiveItems(model, template, view, todo);
+      view.renderActiveItems(model, template, view, todo);
     });
 
   }
@@ -51,6 +51,15 @@ export default class View {
     const itemsLeft = view.getActiveItemsData(model.todos);
     mediator.publish('saveLeftItems', itemsLeft, todo);
     DOM.addContentStart(foundElementsSet.leftItems, itemsLeft);
+  }
+
+  renderNoItems(text, view) {
+
+    const itemsLeftElement = DOM.getElement(view.template, '.left');
+    if (itemsLeftElement.firstChild) {
+      DOM.removeNode(itemsLeftElement.firstChild);
+    }
+    DOM.addContentStart(itemsLeftElement, text);
   }
 
   attachListener({plusButton, input, all, active, completed, clear_completed}) {
