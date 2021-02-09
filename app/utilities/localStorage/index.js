@@ -4,7 +4,7 @@ export default class SaveToLocalStorage {
   }
 
   setItem(item) {
-    this.local.setItem('todos', item);
+    this.local.setItem('state', item);
   }
 
   getItem(key) {

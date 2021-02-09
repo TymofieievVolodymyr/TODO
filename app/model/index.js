@@ -10,7 +10,7 @@ const getTomorrow = compose(formatDate, nextDayDate);
 export default class Model {
   constructor(view) {
     this.view = view;
-    this.todos = JSON.parse(storage.getItem('todos')) ?? [];
+    this.todos = JSON.parse(storage.getItem('state')) ?? [];
     mediator.publish('fullList', this.todos);
   }
 
@@ -28,15 +28,10 @@ export default class Model {
       },
       leftItems: null,
     }
-    const todo = {
-      id: this.todos.length > 0 ? this.todos[this.todos.length - 1].id + 1 : 1,
-      text: todoText,
-      creationDate: getToday(),
-      expirationDate: getTomorrow(),
-    }
-    this.todos.push(todo);
-    mediator.publish('showModal', todo);
-    this.attach(this.todos);
+
+    this.todos.push(state.todo);
+    mediator.publish('showModal', state.todo);
+    this.attach(state);
   }
 
   editTodoItem(toDoItem) {
