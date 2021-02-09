@@ -4,6 +4,13 @@ import {itemTpl} from "../../templates/itemTpl"
 
 export default class ListItemView {
   render(toDoItem, template) {
+    this.queryElementAndAssignData(toDoItem, template);
+    this.attachListenersAndCheckDone(toDoItem);
+
+    return this;
+  }
+
+  queryElementAndAssignData(toDoItem, template){
     this.ulElement = DOM.getElement(template, '.todo-list');
     DOM.addContentEnd(this.ulElement, itemTpl);
 
@@ -20,10 +27,6 @@ export default class ListItemView {
     this.spanItemNextDay.textContent = toDoItem.expirationDate;
 
     this.deleteButton = DOM.getElement(this.liElement, '.delete');
-
-    this.attachListenersAndCheckDone(toDoItem);
-
-    return this;
   }
 
   attachListenersAndCheckDone(toDoItem) {
