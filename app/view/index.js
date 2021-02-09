@@ -9,7 +9,7 @@ export default class View {
     this.template = DOM.createElement('div', 'wrapper');
   }
 
-  reRenderTodo(model, template) {
+  reRenderTodo(model, template, view) {
     this.todoList = DOM.getElement(template, '.todo-list');
 
     while (this.todoList.firstChild) {
@@ -48,7 +48,6 @@ export default class View {
         input.value = '';
       }
     });
-
 
     all.addEventListener('click', event => {
       event.preventDefault();
@@ -93,10 +92,4 @@ export default class View {
     return {todoList, plusButton, input, leftItems, all, active, completed, clear_completed}
   }
 
-  renderItemTodo(todo) {
-    this.todoList = DOM.getElement(this.template, '.todo-list');
-    const liItemInstance = new ListItemView();
-    const liItem = liItemInstance.render(todo, this.template);
-    DOM.append(this.todoList, liItem.liElement);
-  }
 }

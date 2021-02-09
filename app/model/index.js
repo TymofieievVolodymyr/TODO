@@ -7,7 +7,8 @@ const getToday = compose(formatDate);
 const getTomorrow = compose(formatDate, nextDayDate);
 
 export default class Model {
-  constructor() {
+  constructor(view) {
+    this.view = view;
     this.todos = JSON.parse(storage.getItem('todos')) ?? [];
     mediator.publish('fullList', this.todos);
   }
@@ -24,7 +25,7 @@ export default class Model {
       expirationDate: getTomorrow(),
     }
     this.todos.push(todo);
-    mediator.publish('showInitialModal', todo);
+    mediator.publish('showModal', todo);
     this.attach(this.todos);
   }
 
@@ -32,7 +33,7 @@ export default class Model {
     this.todos = this.todos.map((todo) => {
       return todo.id === toDoItem.id ? toDoItem : todo
     });
-    mediator.publish('reRenderFullList', this, DOM.getElement(document, '.wrapper'));
+    mediator.publish('reRenderFullList', this, DOM.getElement(document, '.wrapper'), this.view);
     this.attach(this.todos);
   }
 
@@ -41,7 +42,7 @@ export default class Model {
       return todo.id === toDoItem.id ? {...toDoItem, done: !toDoItem.done} : todo
     });
 
-    mediator.publish('reRenderFullList', this, DOM.getElement(document, '.wrapper'));
+    mediator.publish('reRenderFullList', this, DOM.getElement(document, '.wrapper'), this.view);
     this.attach(this.todos);
   }
 
@@ -50,7 +51,7 @@ export default class Model {
       return todo.id !== toDoItem.id;
     });
 
-    mediator.publish('reRenderFullList', this, DOM.getElement(document, '.wrapper'));
+    mediator.publish('reRenderFullList', this, DOM.getElement(document, '.wrapper'), this.view);
     this.attach(this.todos);
   }
 }
