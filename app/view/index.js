@@ -21,6 +21,9 @@ export default class View {
       const liItem = liItemInstance.render(todo, template);
       DOM.append(this.todoList, liItem.liElement);
     });
+
+    view.renderActiveItems(model, template, view);
+
   }
 
   renderListTodo(model, template, view) {
@@ -36,7 +39,15 @@ export default class View {
     });
 
     view.attachListener(foundElementsSet);
-    const itemsLeft = view.renderActiveItems(model.todos);
+  }
+
+  renderActiveItems(model, template, view) {
+
+    const foundElementsSet = view.queryElement(template);
+    if (foundElementsSet.leftItems.firstChild) {
+      DOM.removeNode(foundElementsSet.leftItems.firstChild);
+    }
+    const itemsLeft = view.getActiveItemsData(model.todos);
     DOM.addContentStart(foundElementsSet.leftItems, itemsLeft);
   }
 
@@ -75,7 +86,7 @@ export default class View {
     });
   }
 
-  renderActiveItems(todoList) {
+  getActiveItemsData(todoList) {
     return `${todoList.length} item${todoList.length !== 1 ? 's' : ''} left`;
   }
 
