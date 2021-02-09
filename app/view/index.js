@@ -24,6 +24,7 @@ export default class View {
     });
 
     view.renderActiveItems(model, template, view);
+
   }
 
   renderListTodo(model, template, view) {
@@ -44,8 +45,8 @@ export default class View {
   }
 
   renderActiveItems(model, template, view) {
-    const foundElementsSet = view.queryElement(template);
 
+    const foundElementsSet = view.queryElement(template);
     if (foundElementsSet.leftItems.firstChild) {
       DOM.removeNode(foundElementsSet.leftItems.firstChild);
     }
