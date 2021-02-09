@@ -16,7 +16,8 @@ export default class View {
       DOM.removeNode(this.todoList.firstChild);
     }
 
-    model.todos.forEach(todo => {
+
+    model.state.forEach(todo => {
       const liItemInstance = new ListItemView();
       const liItem = liItemInstance.render(todo, template);
       DOM.append(this.todoList, liItem.liElement);
@@ -26,12 +27,14 @@ export default class View {
   }
 
   renderListTodo(model, template, view) {
+    console.log(model);
+    console.log(model.state.todo);
     DOM.addContentStart(template, formTpl);
     DOM.append(view.app, template);
 
     const foundElementsSet = view.queryElement(template);
 
-    model.todos.forEach(todo => {
+    model.state.forEach(todo => {
       const liItemInstance = new ListItemView();
       const liItem = liItemInstance.render(todo, template);
       DOM.append(foundElementsSet.todoList, liItem.liElement);
