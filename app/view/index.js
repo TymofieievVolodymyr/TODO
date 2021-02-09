@@ -20,9 +20,9 @@ export default class View {
       const liItemInstance = new ListItemView();
       const liItem = liItemInstance.render(todo, template);
       DOM.append(this.todoList, liItem.liElement);
+     view.renderActiveItems(model, template, view, todo);
     });
 
-    view.renderActiveItems(model, template, view);
   }
 
   renderListTodo(model, template, view) {
@@ -32,21 +32,24 @@ export default class View {
     const foundElementsSet = view.queryElement(template);
 
     model.todos.forEach(todo => {
+
       const liItemInstance = new ListItemView();
       const liItem = liItemInstance.render(todo, template);
       DOM.append(foundElementsSet.todoList, liItem.liElement);
+      view.renderActiveItems(model, template, view, todo);
     });
 
     view.attachListener(foundElementsSet);
   }
 
-  renderActiveItems(model, template, view) {
+  renderActiveItems(model, template, view, todo) {
     const foundElementsSet = view.queryElement(template);
 
     if (foundElementsSet.leftItems.firstChild) {
       DOM.removeNode(foundElementsSet.leftItems.firstChild);
     }
     const itemsLeft = view.getActiveItemsData(model.todos);
+    mediator.publish('saveLeftItems', itemsLeft, todo);
     DOM.addContentStart(foundElementsSet.leftItems, itemsLeft);
   }
 

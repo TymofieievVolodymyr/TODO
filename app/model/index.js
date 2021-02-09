@@ -19,20 +19,12 @@ export default class Model {
   }
 
   addTodoItem(todoText) {
-    const state = {
-      todo: {
-        id: this.todos.length > 0 ? this.todos[this.todos.length - 1].id + 1 : 1,
-        text: todoText,
-        creationDate: getToday(),
-        expirationDate: getTomorrow(),
-      },
-      leftItems: null,
-    }
     const todo = {
       id: this.todos.length > 0 ? this.todos[this.todos.length - 1].id + 1 : 1,
       text: todoText,
       creationDate: getToday(),
       expirationDate: getTomorrow(),
+      leftItems: 0,
     }
     this.todos.push(todo);
     mediator.publish('showModal', todo);
@@ -65,9 +57,10 @@ export default class Model {
     this.attach(this.todos);
   }
 
-  saveLeftItems(toDoItem) {
+  saveLeftItems(itemsLeft, toDoItem) {
     this.todos = this.todos.map((todo) => {
-      return todo.id === toDoItem.id ? {...toDoItem, done: !toDoItem.done} : todo
+      return  todo.id === toDoItem.id ? {...toDoItem, leftItems: itemsLeft} : todo
     });
+
   }
 }
