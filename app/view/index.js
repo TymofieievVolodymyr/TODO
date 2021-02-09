@@ -24,34 +24,73 @@ export default class View {
   }
 
   renderListTodo(model, template, view) {
-      DOM.addContentStart(template, formTpl);
-      DOM.append(view.app, template);
+    DOM.addContentStart(template, formTpl);
+    DOM.append(view.app, template);
 
-    const {todoList, plusButton, input} = view.queryElement(template);
+    const foundElementsSet = view.queryElement(template);
 
     model.todos.forEach(todo => {
       const liItemInstance = new ListItemView();
       const liItem = liItemInstance.render(todo, template);
-      DOM.append(todoList, liItem.liElement);
+      DOM.append(foundElementsSet.todoList, liItem.liElement);
     });
-    view.attachListener(plusButton, input);
+
+    view.attachListener(foundElementsSet);
+    const itemsLeft = view.renderActiveItems(model.todos);
+    DOM.addContentStart(foundElementsSet.leftItems, itemsLeft);
   }
 
-  attachListener(button, input) {
-    button.addEventListener('click', event => {
+  attachListener({plusButton, input, leftItems, all, active, completed, clear_completed}) {
+    plusButton.addEventListener('click', event => {
       event.preventDefault();
       if (input.value !== '') {
         mediator.publish('addInput', input.value);
         input.value = '';
       }
     });
+
+
+    all.addEventListener('click', event => {
+      event.preventDefault();
+      console.log('all');
+    });
+
+    leftItems.addEventListener('click', event => {
+      event.preventDefault();
+      console.log('leftItems');
+    });
+
+    active.addEventListener('click', event => {
+      event.preventDefault();
+      console.log('active');
+    });
+
+    completed.addEventListener('click', event => {
+      event.preventDefault();
+      console.log('completed');
+    });
+
+    clear_completed.addEventListener('click', event => {
+      event.preventDefault();
+      console.log('clear_completed');
+    });
+  }
+
+  renderActiveItems(todoList) {
+    return `${todoList.length} item${todoList.length !== 1 ? 's' : ''} left`;
   }
 
   queryElement(template) {
     let todoList = DOM.getElement(template, '.todo-list');
     let plusButton = DOM.getElement(template, '.add__item');
     let input = DOM.getElement(template, 'input');
-    return {todoList, plusButton, input};
+    let leftItems = DOM.getElement(template, '.left');
+    let all = DOM.getElement(template, '.all');
+    let active = DOM.getElement(template, '.active');
+    let completed = DOM.getElement(template, '.completed');
+    let clear_completed = DOM.getElement(template, '.clear_completed');
+
+    return {todoList, plusButton, input, leftItems, all, active, completed, clear_completed}
   }
 
   renderItemTodo(todo) {

@@ -14,7 +14,7 @@ export const formTpl = `
     <li><a class="all">all</a></li>
     <li><a class="active">Active</a></li>
     <li><a class="completed">Completed</a></li>
-    <li><a class="clear-completed">Clear Completed</a></li>
+    <li><a class="clear_completed">Clear Completed</a></li>
   </ul>
   </footer>
 `;
