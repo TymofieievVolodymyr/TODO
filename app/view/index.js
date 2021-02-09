@@ -53,7 +53,7 @@ export default class View {
     DOM.addContentStart(foundElementsSet.leftItems, itemsLeft);
   }
 
-  attachListener({plusButton, input, leftItems, all, active, completed, clear_completed}) {
+  attachListener({plusButton, input, all, active, completed, clear_completed}) {
     plusButton.addEventListener('click', event => {
       event.preventDefault();
       if (input.value !== '') {
@@ -65,11 +65,6 @@ export default class View {
     all.addEventListener('click', event => {
       event.preventDefault();
       console.log('all');
-    });
-
-    leftItems.addEventListener('click', event => {
-      event.preventDefault();
-      console.log('leftItems');
     });
 
     active.addEventListener('click', event => {
