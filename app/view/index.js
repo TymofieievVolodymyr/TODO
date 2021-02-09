@@ -16,26 +16,22 @@ export default class View {
       DOM.removeNode(this.todoList.firstChild);
     }
 
-
-    model.state.forEach(todo => {
+    model.todos.forEach(todo => {
       const liItemInstance = new ListItemView();
       const liItem = liItemInstance.render(todo, template);
       DOM.append(this.todoList, liItem.liElement);
     });
 
     view.renderActiveItems(model, template, view);
-
   }
 
   renderListTodo(model, template, view) {
-    console.log(model);
-    console.log(model.state.todo);
     DOM.addContentStart(template, formTpl);
     DOM.append(view.app, template);
 
     const foundElementsSet = view.queryElement(template);
 
-    model.state.forEach(todo => {
+    model.todos.forEach(todo => {
       const liItemInstance = new ListItemView();
       const liItem = liItemInstance.render(todo, template);
       DOM.append(foundElementsSet.todoList, liItem.liElement);
@@ -45,8 +41,8 @@ export default class View {
   }
 
   renderActiveItems(model, template, view) {
-
     const foundElementsSet = view.queryElement(template);
+
     if (foundElementsSet.leftItems.firstChild) {
       DOM.removeNode(foundElementsSet.leftItems.firstChild);
     }

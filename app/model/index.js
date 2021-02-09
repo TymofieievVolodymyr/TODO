@@ -3,6 +3,7 @@ import DOM from "../utilities/DOM";
 import formatDate from "../utilities/formatDate";
 import {nextDayDate} from "../utilities/formatDate";
 import {compose} from "../utilities/compose";
+
 const getToday = compose(formatDate);
 const getTomorrow = compose(formatDate, nextDayDate);
 
@@ -18,6 +19,15 @@ export default class Model {
   }
 
   addTodoItem(todoText) {
+    const state = {
+      todo: {
+        id: this.todos.length > 0 ? this.todos[this.todos.length - 1].id + 1 : 1,
+        text: todoText,
+        creationDate: getToday(),
+        expirationDate: getTomorrow(),
+      },
+      leftItems: null,
+    }
     const todo = {
       id: this.todos.length > 0 ? this.todos[this.todos.length - 1].id + 1 : 1,
       text: todoText,
@@ -53,5 +63,11 @@ export default class Model {
 
     mediator.publish('reRenderFullList', this, DOM.getElement(document, '.wrapper'), this.view);
     this.attach(this.todos);
+  }
+
+  saveLeftItems(toDoItem) {
+    this.todos = this.todos.map((todo) => {
+      return todo.id === toDoItem.id ? {...toDoItem, done: !toDoItem.done} : todo
+    });
   }
 }
