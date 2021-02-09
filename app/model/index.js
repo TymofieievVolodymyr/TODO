@@ -8,8 +8,8 @@ const getToday = compose(formatDate);
 const getTomorrow = compose(formatDate, nextDayDate);
 
 export default class Model {
-  constructor(view) {
-    this.view = view;
+  constructor() {
+    //this.view = view;
     this.todos = JSON.parse(storage.getItem('todos')) ?? [];
     mediator.publish('fullList', this.todos);
   }
@@ -32,36 +32,40 @@ export default class Model {
     this.attach(this.todos);
   }
 
-  editTodoItem(toDoItem) {
+  editTodoItem(toDoItem, view) {
+    console.log(view);
     this.todos = this.todos.map((todo) => {
       return todo.id === toDoItem.id ? toDoItem : todo
     });
-    mediator.publish('reRenderFullList', this, DOM.getElement(document, '.wrapper'), this.view);
+    //mediator.publish('reRenderFullList', this, DOM.getElement(document, '.wrapper'), this.view);
+    mediator.publish('reRenderFullList', view);
     this.attach(this.todos);
   }
 
-  toggleDone(toDoItem) {
+  toggleDone(toDoItem, view) {
     this.todos = this.todos.map((todo) => {
       return todo.id === toDoItem.id ? {...toDoItem, done: !toDoItem.done} : todo
     });
 
-    mediator.publish('reRenderFullList', this, DOM.getElement(document, '.wrapper'), this.view);
+    mediator.publish('reRenderFullList', view);
+    //mediator.publish('reRenderFullList', this, DOM.getElement(document, '.wrapper'), this.view);
     this.attach(this.todos);
   }
 
-  deleteItem(toDoItem) {
+  deleteItem(toDoItem, view) {
     this.todos = this.todos.filter((todo) => {
       return todo.id !== toDoItem.id;
     });
 
-    mediator.publish('reRenderFullList', this, DOM.getElement(document, '.wrapper'), this.view);
+    mediator.publish('reRenderFullList', view);
     this.attach(this.todos);
     if (this.todos.length === 0) {
-      mediator.publish('noItems', 'No items', this.view);
+      mediator.publish('noItems', 'No items', view);
+      // mediator.publish('noItems', 'No items', this.view);
     }
   }
 
-  saveLeftItems(itemsLeft = 'No items', toDoItem) {
+  saveLeftItems(itemsLeft, toDoItem) {
     this.todos = this.todos.map((todo) => {
       return todo.id === toDoItem.id ? {...toDoItem, leftItems: itemsLeft} : todo
     });

@@ -4,8 +4,14 @@ import inputVerifier from "../../utilities/inputVerifier";
 import {mediator} from "../../root";
 
 export default class ModalView {
-  constructor() {
+  constructor(view) {
     this.body = DOM.getElement(document, 'body');
+    this.view = view;
+  }
+
+  renderPopUp(toDoItem) {
+    this.queryElementAndAssignData(toDoItem);
+    this.attachListenersAndFireEvent(toDoItem, this.view);
   }
 
   queryElementAndAssignData(toDoItem) {
@@ -24,7 +30,7 @@ export default class ModalView {
     this.expirationDate.value = toDoItem.expirationDate;
   }
 
-  attachListenersAndFireEvent(toDoItem) {
+  attachListenersAndFireEvent(toDoItem, view) {
     this.inputText.addEventListener('keydown', () => {
       DOM.removeClassFromNode(this.inputText, 'invalid_input');
     }, false);
@@ -34,23 +40,19 @@ export default class ModalView {
     }, false);
 
     this.successButton.addEventListener('click', () => {
+      console.log(this.inputText.value);
       let characterVerifier = inputVerifier(this.inputText.value);
       if (characterVerifier) {
         toDoItem.text = this.inputText.value;
         toDoItem.creationDate = this.currentDate.value;
         toDoItem.expirationDate = this.expirationDate.value;
 
-        mediator.publish('editInput', toDoItem);
+        mediator.publish('editInput', toDoItem, view);
 
         DOM.removeNode(this.modal);
       } else {
         DOM.addClassToNode(this.inputText, 'invalid_input');
       }
     }, false);
-  }
-
-  renderPopUp(toDoItem) {
-    this.queryElementAndAssignData(toDoItem);
-    this.attachListenersAndFireEvent(toDoItem);
   }
 }

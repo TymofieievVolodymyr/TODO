@@ -2,48 +2,63 @@ import ListItemView from "./listItemView";
 import {formTpl} from "../templates/formTpl";
 import {mediator} from "../root";
 import DOM from '../utilities/DOM'
+import ModalView from "./modalView";
 
 export default class View {
   constructor() {
     this.app = DOM.getElement(document, '#root');
     this.template = DOM.createElement('div', 'wrapper');
+    this.modalView = new ModalView(this);
   }
 
-  reRenderTodo(model, template, view) {
-    this.todoList = DOM.getElement(template, '.todo-list');
+  reRenderTodo(view) {
+    console.log(this);
+    console.log(view);
+    this.todoList = DOM.getElement(view.template, '.todo-list');
 
     while (this.todoList.firstChild) {
       DOM.removeNode(this.todoList.firstChild);
     }
 
-    model.todos.forEach(todo => {
+    this.todos.forEach(todo => {
       const liItemInstance = new ListItemView();
-      const liItem = liItemInstance.render(todo, template);
+      const liItem = liItemInstance.render(todo, view);
       DOM.append(this.todoList, liItem.liElement);
-      view.renderActiveItems(model, template, view, todo);
+      view.renderActiveItems(this, view, todo);
     });
 
   }
 
-  renderListTodo(model, template, view) {
-    DOM.addContentStart(template, formTpl);
-    DOM.append(view.app, template);
+//  renderListTodo(model, template, view) {
+  renderListTodo(view) {
+    // console.log(this);
+    // console.log(view);
+    DOM.addContentStart(view.template, formTpl);
+    DOM.append(view.app, view.template);
+    const foundElementsSet = view.queryElement(view.template);
 
-    const foundElementsSet = view.queryElement(template);
+    // DOM.addContentStart(template, formTpl);
+    // DOM.append(view.app, template);
+    // const foundElementsSet = view.queryElement(template);
 
-    model.todos.forEach(todo => {
-
+    this.todos.forEach(todo => {
       const liItemInstance = new ListItemView();
-      const liItem = liItemInstance.render(todo, template);
+      const liItem = liItemInstance.render(todo, view);
       DOM.append(foundElementsSet.todoList, liItem.liElement);
-      view.renderActiveItems(model, template, view, todo);
+      view.renderActiveItems(this, view, todo);
     });
+    // model.todos.forEach(todo => {
+    //   const liItemInstance = new ListItemView();
+    //   const liItem = liItemInstance.render(todo, template);
+    //   DOM.append(foundElementsSet.todoList, liItem.liElement);
+    //   view.renderActiveItems(model, template, view, todo);
+    // });
 
     view.attachListener(foundElementsSet);
   }
 
-  renderActiveItems(model, template, view, todo) {
-    const foundElementsSet = view.queryElement(template);
+  renderActiveItems(model, view, todo) {
+    const foundElementsSet = view.queryElement(view.template);
 
     if (foundElementsSet.leftItems.firstChild) {
       DOM.removeNode(foundElementsSet.leftItems.firstChild);

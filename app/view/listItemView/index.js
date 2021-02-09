@@ -3,9 +3,9 @@ import {mediator} from "../../root";
 import {itemTpl} from "../../templates/itemTpl"
 
 export default class ListItemView {
-  render(toDoItem, template) {
-    this.queryElementAndAssignData(toDoItem, template);
-    this.attachListenersAndCheckDone(toDoItem);
+  render(toDoItem, view) {
+    this.queryElementAndAssignData(toDoItem, view.template);
+    this.attachListenersAndCheckDone(toDoItem, view);
 
     return this;
   }
@@ -29,15 +29,17 @@ export default class ListItemView {
     this.deleteButton = DOM.getElement(this.liElement, '.delete');
   }
 
-  attachListenersAndCheckDone(toDoItem) {
+  attachListenersAndCheckDone(toDoItem, view) {
+    console.log(view);
+
     this.deleteButton.addEventListener('click', () => {
-      mediator.publish('delete', toDoItem)
+      mediator.publish('delete', toDoItem, view)
     }, false);
 
     this.button = DOM.getElement(this.liElement, '.pencil');
 
     this.button.addEventListener('click', () => {
-      mediator.publish('showModal', toDoItem);
+      mediator.publish('showModal', toDoItem, view);
     });
 
     this.checkbox = DOM.getElement(this.liElement, '.input__checkbox');
@@ -53,7 +55,7 @@ export default class ListItemView {
     }
 
     this.checkbox.addEventListener('click', () => {
-      mediator.publish('toggleComplete', toDoItem);
+      mediator.publish('toggleComplete', toDoItem, view);
       DOM.addClassToNode(this.liElement, 'done');
     }, false);
   }
