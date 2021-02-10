@@ -8,8 +8,3 @@ export const itemTpl = `
   <button class="delete">x</button>
 </li>
 `;
-
-
-
-
-

@@ -1,8 +1,8 @@
 import {mediator, storage} from "../root";
-import DOM from "../utilities/DOM";
 import formatDate from "../utilities/formatDate";
 import {nextDayDate} from "../utilities/formatDate";
 import {compose} from "../utilities/compose";
+
 const getToday = compose(formatDate);
 const getTomorrow = compose(formatDate, nextDayDate);
 
@@ -22,34 +22,70 @@ export default class Model {
       text: todoText,
       creationDate: getToday(),
       expirationDate: getTomorrow(),
+      done: false,
+      leftItems: null,
     }
+
     this.todos.push(todo);
-    mediator.publish('showInitialModal', todo);
+    mediator.publish('showModal', todo);
     this.attach(this.todos);
   }
 
-  editTodoItem(toDoItem) {
+  editTodoItem(toDoItem, view) {
     this.todos = this.todos.map((todo) => {
       return todo.id === toDoItem.id ? toDoItem : todo
     });
 
-    mediator.publish('fullList', this, DOM.getElement(document, '.wrapper'));
+    mediator.publish('reRenderFullList', view);
     this.attach(this.todos);
   }
 
-  toggleDone(toDoItem) {
+  toggleDone(toDoItem, view) {
     this.todos = this.todos.map((todo) => {
       return todo.id === toDoItem.id ? {...toDoItem, done: !toDoItem.done} : todo
     });
-    mediator.publish('fullList', this, DOM.getElement(document, '.wrapper'));
+
+    mediator.publish('reRenderFullList', view);
     this.attach(this.todos);
   }
 
-  deleteItem(toDoItem) {
+  deleteItem(toDoItem, view) {
     this.todos = this.todos.filter((todo) => {
       return todo.id !== toDoItem.id;
     });
-    mediator.publish('fullList', this, DOM.getElement(document, '.wrapper'));
+
+    mediator.publish('reRenderFullList', view);
+    this.attach(this.todos);
+    if (this.todos.length === 0) {
+      mediator.publish('noItems', 'No items', view);
+    }
+  }
+
+  saveLeftItems(itemsLeft, toDoItem) {
+    this.todos = this.todos.map((todo) => {
+      return todo.id === toDoItem.id ? {...toDoItem, leftItems: itemsLeft} : todo
+    });
+  }
+
+  filterActiveItems(todosCollection, view) {
+    const activeItemsCollection = todosCollection.filter((todo) => {
+      return !todo.done;
+    });
+    mediator.publish('reRenderFullList', view, activeItemsCollection);
+  }
+
+  filterCompletedItems(todosCollection, view) {
+    const completedItemsCollection = todosCollection.filter((todo) => {
+      return todo.done;
+    });
+    mediator.publish('reRenderFullList', view, completedItemsCollection);
+  }
+
+  deleteCompletedItems(view) {
+    this.todos = this.todos.filter((todo) => {
+      return !todo.done;
+    });
+    mediator.publish('reRenderFullList', view);
     this.attach(this.todos);
   }
 }

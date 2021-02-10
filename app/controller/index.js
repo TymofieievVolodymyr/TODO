@@ -1,24 +1,25 @@
 import {mediator} from "../root";
 
 export default class Controller {
-  constructor(model, view, modalWindow) {
+  constructor(model, view) {
 
     this.model = model;
     this.view = view;
-    this.modalWindow = modalWindow;
 
-    mediator.subscribe('fullList', this.view.renderListTodo.bind(this.model.todos));
-    mediator.publish('fullList', this.model, this.view.template, this.view.app);
+    mediator.subscribe('fullList', this.view.renderListTodo.bind(this.model));
+    mediator.publish('fullList', this.view);
+    mediator.subscribe('reRenderFullList', this.view.reRenderTodo.bind(this.model));
     mediator.subscribe('addInput', this.model.addTodoItem.bind(this.model));
     mediator.subscribe('editInput', this.model.editTodoItem.bind(this.model));
-    mediator.subscribe('listChanges', this.view.renderItemTodo.bind(this.view));
-    mediator.subscribe('showModal', this.modalWindow.renderPopUp.bind(this.modalWindow));
-    mediator.subscribe('showInitialModal', this.modalWindow.renderInitModal.bind(this.modalWindow));
+    mediator.subscribe('showModal', view.modalView.renderPopUp.bind(view.modalView));
     mediator.subscribe('toggleComplete', this.model.toggleDone.bind(this.model));
     mediator.subscribe('delete', this.model.deleteItem.bind(this.model));
-
+    mediator.subscribe('saveLeftItems', this.model.saveLeftItems.bind(this.model));
+    mediator.subscribe('noItems', this.view.renderNoItems.bind(this.model));
+    mediator.subscribe('filterActiveItems', this.model.filterActiveItems.bind(this.model));
+    mediator.subscribe('filterCompletedItems', this.model.filterCompletedItems.bind(this.model));
+    mediator.subscribe('deleteCompletedItems', this.model.deleteCompletedItems.bind(this.model));
   }
-
 }
 
 

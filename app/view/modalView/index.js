@@ -1,12 +1,17 @@
 import DOM from "../../utilities/DOM";
 import {modalTpl} from "../../templates/modalTpl"
 import inputVerifier from "../../utilities/inputVerifier";
-import {getEditEvent, getListChangesEvent} from "../../utilities/eventsHelper";
-
+import {mediator} from "../../root";
 
 export default class ModalView {
-  constructor() {
+  constructor(view) {
     this.body = DOM.getElement(document, 'body');
+    this.view = view;
+  }
+
+  renderPopUp(toDoItem) {
+    this.queryElementAndAssignData(toDoItem);
+    this.attachListenersAndFireEvent(toDoItem, this.view);
   }
 
   queryElementAndAssignData(toDoItem) {
@@ -25,7 +30,7 @@ export default class ModalView {
     this.expirationDate.value = toDoItem.expirationDate;
   }
 
-  attachListenersAndFireEvent(toDoItem, eventTypeCallback) {
+  attachListenersAndFireEvent(toDoItem, view) {
     this.inputText.addEventListener('keydown', () => {
       DOM.removeClassFromNode(this.inputText, 'invalid_input');
     }, false);
@@ -41,7 +46,7 @@ export default class ModalView {
         toDoItem.creationDate = this.currentDate.value;
         toDoItem.expirationDate = this.expirationDate.value;
 
-        eventTypeCallback(toDoItem);
+        mediator.publish('editInput', toDoItem, view);
 
         DOM.removeNode(this.modal);
       } else {
@@ -49,15 +54,4 @@ export default class ModalView {
       }
     }, false);
   }
-
-  renderPopUp(toDoItem) {
-    this.queryElementAndAssignData(toDoItem);
-    this.attachListenersAndFireEvent(toDoItem, getEditEvent);
-  }
-
-  renderInitModal(toDoItem) {
-    this.queryElementAndAssignData(toDoItem);
-    this.attachListenersAndFireEvent(toDoItem, getListChangesEvent);
-  }
-
 }

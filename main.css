@@ -206,4 +206,23 @@ h1 {
     color: lightslategray;
 }
 
+.footer {
+    margin-top:40px;
+}
+
+.filter {
+    display: flex;
+    list-style-type: none;
+    justify-content: space-between;
+}
+
+.filter a {
+    text-decoration: none;
+    padding: 5px;
+    background-color: lightblue;
+    border-radius: 10px;
+    cursor:pointer;
+}
+
+
 

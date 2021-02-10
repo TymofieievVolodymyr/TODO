@@ -8,6 +8,15 @@ export const formTpl = `
   </form>
   <ul class="todo-list">
   </ul>
+  <footer class="footer">
+  <ul class="filter">
+    <li class="left">No items</li>
+    <li><a class="all">all</a></li>
+    <li><a class="active">Active</a></li>
+    <li><a class="completed">Completed</a></li>
+    <li><a class="clear_completed">Clear Completed</a></li>
+  </ul>
+  </footer>
 `;
 
 
