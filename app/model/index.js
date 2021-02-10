@@ -66,4 +66,11 @@ export default class Model {
       return todo.id === toDoItem.id ? {...toDoItem, leftItems: itemsLeft} : todo
     });
   }
+
+  filterActiveItems(todosCollection, view) {
+    const activeItemsCollection = todosCollection.filter((todo) => {
+      return todo.done === false;
+    });
+    mediator.publish('reRenderFullList', view, activeItemsCollection);
+  }
 }

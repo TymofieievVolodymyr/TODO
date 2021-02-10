@@ -11,14 +11,18 @@ export default class View {
     this.modalView = new ModalView(this);
   }
 
-  reRenderTodo(view) {
+  reRenderTodo(view, filteredCollection) {
     const foundElementsSet = view.queryElement(view.template);
 
     while (foundElementsSet.todoList.firstChild) {
       DOM.removeNode(foundElementsSet.todoList.firstChild);
     }
 
-    view.todosIteration(this, foundElementsSet, view);
+    if (filteredCollection) {
+      view.todosIteration(filteredCollection, foundElementsSet, view);
+    } else {
+      view.todosIteration(this.todos, foundElementsSet, view);
+    }
   }
 
   renderListTodo(view) {
@@ -26,17 +30,17 @@ export default class View {
     DOM.append(view.app, view.template);
     const foundElementsSet = view.queryElement(view.template);
 
-    view.todosIteration(this, foundElementsSet, view);
-    view.attachListener(foundElementsSet);
+    view.todosIteration(this.todos, foundElementsSet, view);
+    view.attachListener(foundElementsSet, this, view);
   }
 
-  renderActiveItems(model, view, todo) {
+  renderRemainItems(model, view, todo) {
     const foundElementsSet = view.queryElement(view.template);
 
     if (foundElementsSet.leftItems.firstChild) {
       DOM.removeNode(foundElementsSet.leftItems.firstChild);
     }
-    const itemsLeft = view.getActiveItemsData(model.todos);
+    const itemsLeft = view.getActiveItemsData(model);
     mediator.publish('saveLeftItems', itemsLeft, todo);
     DOM.addContentStart(foundElementsSet.leftItems, itemsLeft);
   }
@@ -50,15 +54,15 @@ export default class View {
   }
 
   todosIteration(todosCollection, foundElementsSet, view) {
-    todosCollection.todos.forEach(todo => {
+    todosCollection.forEach(todo => {
       const liItemInstance = new ListItemView();
       const liItem = liItemInstance.render(todo, view);
       DOM.append(foundElementsSet.todoList, liItem.liElement);
-      view.renderActiveItems(todosCollection, view, todo);
+      view.renderRemainItems(todosCollection, view, todo);
     });
   }
 
-  attachListener({plusButton, input, all, active, completed, clear_completed}) {
+  attachListener({plusButton, input, all, active, completed, clear_completed}, model, view) {
     plusButton.addEventListener('click', event => {
       event.preventDefault();
       if (input.value !== '') {
@@ -73,7 +77,7 @@ export default class View {
 
     active.addEventListener('click', event => {
       event.preventDefault();
-      //
+      mediator.publish('filterActiveItems', model.todos, view);
     });
 
     completed.addEventListener('click', event => {
