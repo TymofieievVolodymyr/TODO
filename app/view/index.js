@@ -88,6 +88,7 @@ export default class View {
 
     clear_completed.addEventListener('click', event => {
       event.preventDefault();
+      mediator.publish('deleteCompletedItems', view);
     });
   }
 
