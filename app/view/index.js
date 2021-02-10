@@ -12,8 +12,6 @@ export default class View {
   }
 
   reRenderTodo(view) {
-    console.log(this);
-    console.log(view);
     this.todoList = DOM.getElement(view.template, '.todo-list');
 
     while (this.todoList.firstChild) {
@@ -29,17 +27,10 @@ export default class View {
 
   }
 
-//  renderListTodo(model, template, view) {
   renderListTodo(view) {
-    // console.log(this);
-    // console.log(view);
     DOM.addContentStart(view.template, formTpl);
     DOM.append(view.app, view.template);
     const foundElementsSet = view.queryElement(view.template);
-
-    // DOM.addContentStart(template, formTpl);
-    // DOM.append(view.app, template);
-    // const foundElementsSet = view.queryElement(template);
 
     this.todos.forEach(todo => {
       const liItemInstance = new ListItemView();
@@ -47,12 +38,6 @@ export default class View {
       DOM.append(foundElementsSet.todoList, liItem.liElement);
       view.renderActiveItems(this, view, todo);
     });
-    // model.todos.forEach(todo => {
-    //   const liItemInstance = new ListItemView();
-    //   const liItem = liItemInstance.render(todo, template);
-    //   DOM.append(foundElementsSet.todoList, liItem.liElement);
-    //   view.renderActiveItems(model, template, view, todo);
-    // });
 
     view.attachListener(foundElementsSet);
   }

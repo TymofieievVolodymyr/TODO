@@ -1,5 +1,4 @@
 import {mediator, storage} from "../root";
-import DOM from "../utilities/DOM";
 import formatDate from "../utilities/formatDate";
 import {nextDayDate} from "../utilities/formatDate";
 import {compose} from "../utilities/compose";
@@ -9,7 +8,6 @@ const getTomorrow = compose(formatDate, nextDayDate);
 
 export default class Model {
   constructor() {
-    //this.view = view;
     this.todos = JSON.parse(storage.getItem('todos')) ?? [];
     mediator.publish('fullList', this.todos);
   }
@@ -33,11 +31,10 @@ export default class Model {
   }
 
   editTodoItem(toDoItem, view) {
-    console.log(view);
     this.todos = this.todos.map((todo) => {
       return todo.id === toDoItem.id ? toDoItem : todo
     });
-    //mediator.publish('reRenderFullList', this, DOM.getElement(document, '.wrapper'), this.view);
+
     mediator.publish('reRenderFullList', view);
     this.attach(this.todos);
   }
@@ -48,7 +45,6 @@ export default class Model {
     });
 
     mediator.publish('reRenderFullList', view);
-    //mediator.publish('reRenderFullList', this, DOM.getElement(document, '.wrapper'), this.view);
     this.attach(this.todos);
   }
 
@@ -61,7 +57,6 @@ export default class Model {
     this.attach(this.todos);
     if (this.todos.length === 0) {
       mediator.publish('noItems', 'No items', view);
-      // mediator.publish('noItems', 'No items', this.view);
     }
   }
 

@@ -40,7 +40,6 @@ export default class ModalView {
     }, false);
 
     this.successButton.addEventListener('click', () => {
-      console.log(this.inputText.value);
       let characterVerifier = inputVerifier(this.inputText.value);
       if (characterVerifier) {
         toDoItem.text = this.inputText.value;

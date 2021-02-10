@@ -30,7 +30,6 @@ export default class ListItemView {
   }
 
   attachListenersAndCheckDone(toDoItem, view) {
-    console.log(view);
 
     this.deleteButton.addEventListener('click', () => {
       mediator.publish('delete', toDoItem, view)
