@@ -43,12 +43,12 @@ export default class ListItemView {
 
     this.checkbox = DOM.getElement(this.liElement, '.input__checkbox');
 
-    if (toDoItem.done === true) {
+    if (toDoItem.done) {
       DOM.addClassToNode(this.liElement, 'done');
       this.checkbox.checked = true;
     }
 
-    if (toDoItem.done === false) {
+    if (!toDoItem.done) {
       DOM.removeClassFromNode(this.liElement, 'done');
       this.checkbox.checked = false;
     }
