@@ -69,21 +69,21 @@ export default class Model {
 
   filterActiveItems(todosCollection, view) {
     const activeItemsCollection = todosCollection.filter((todo) => {
-      return todo.done === false;
+      return !todo.done;
     });
     mediator.publish('reRenderFullList', view, activeItemsCollection);
   }
 
   filterCompletedItems(todosCollection, view) {
     const completedItemsCollection = todosCollection.filter((todo) => {
-      return todo.done === true;
+      return todo.done;
     });
     mediator.publish('reRenderFullList', view, completedItemsCollection);
   }
 
   deleteCompletedItems(view) {
     this.todos = this.todos.filter((todo) => {
-      return todo.done !== true;
+      return !todo.done;
     });
     mediator.publish('reRenderFullList', view);
     this.attach(this.todos);
