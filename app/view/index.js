@@ -83,6 +83,7 @@ export default class View {
 
     completed.addEventListener('click', event => {
       event.preventDefault();
+      mediator.publish('filterCompletedItems', model.todos, view);
     });
 
     clear_completed.addEventListener('click', event => {

@@ -17,6 +17,7 @@ export default class Controller {
     mediator.subscribe('saveLeftItems', this.model.saveLeftItems.bind(this.model));
     mediator.subscribe('noItems', this.view.renderNoItems.bind(this.model));
     mediator.subscribe('filterActiveItems', this.model.filterActiveItems.bind(this.model));
+    mediator.subscribe('filterCompletedItems', this.model.filterCompletedItems.bind(this.model));
   }
 }
 

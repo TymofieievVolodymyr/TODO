@@ -73,4 +73,11 @@ export default class Model {
     });
     mediator.publish('reRenderFullList', view, activeItemsCollection);
   }
+
+  filterCompletedItems(todosCollection, view) {
+    const completedItemsCollection = todosCollection.filter((todo) => {
+      return todo.done === true;
+    });
+    mediator.publish('reRenderFullList', view, completedItemsCollection);
+  }
 }
