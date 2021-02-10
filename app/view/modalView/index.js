@@ -13,7 +13,7 @@ export default class ModalView {
     this.queryElementAndAssignData(toDoItem);
     this.attachListenersAndFireEvent(toDoItem, this.view);
   }
-
+//TODO refactor this method
   queryElementAndAssignData(toDoItem) {
     DOM.addContentStart(this.body, modalTpl);
     this.modal = DOM.getElement(this.body, '.modal');
