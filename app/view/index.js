@@ -73,6 +73,7 @@ export default class View {
 
     all.addEventListener('click', event => {
       event.preventDefault();
+      mediator.publish('reRenderFullList', view);
     });
 
     active.addEventListener('click', event => {
