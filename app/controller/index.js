@@ -20,6 +20,10 @@ export default class Controller {
     mediator.subscribe('filterCompletedItems', this.model.filterCompletedItems.bind(this.model));
     mediator.subscribe('deleteCompletedItems', this.model.deleteCompletedItems.bind(this.model));
     mediator.subscribe('showSortingBlock', view.sortView.renderSortBlock.bind(view.sortView));
+    mediator.subscribe('sortAscending', this.model.sortAscending.bind(this.model));
+    mediator.subscribe('sortDescending', this.model.sortDescending.bind(this.model));
+    mediator.subscribe('sortAscendingDate', this.model.sortAscendingDate.bind(this.model));
+    mediator.subscribe('sortDescendingDate', this.model.sortDescendingDate.bind(this.model));
   }
 }
 

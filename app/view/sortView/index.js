@@ -8,7 +8,7 @@ export default class SortView {
   renderSortBlock(todosCollection, view) {
     this.queryElementAndAssignData(todosCollection, view);
     //this.attachListenersAndFireEvent(toDoItem, this.view);
-    this.attachListenersAndFireEvent();
+    this.attachListenersAndFireEvent(todosCollection, view);
   }
 
   queryElementAndAssignData(todosCollection, view) {
@@ -22,21 +22,21 @@ export default class SortView {
     this.sortByDateExpired = DOM.getElement(view.template, '.sortByDateExpired');
   }
 
-  attachListenersAndFireEvent() {
+  attachListenersAndFireEvent(todosCollection, view) {
     this.sortByTextAscend.addEventListener('click', () => {
-
+      mediator.publish('sortAscending', todosCollection, view);
     }, false);
 
     this.sortByDescent.addEventListener('click', () => {
-
+      mediator.publish('sortDescending', todosCollection, view);
     }, false);
 
     this.sortByDateCreated.addEventListener('click', () => {
-
+      mediator.publish('sortAscendingDate', todosCollection, view);
     }, false);
 
     this.sortByDateExpired.addEventListener('click', () => {
-
+      mediator.publish('sortDescendingDate', todosCollection, view);
     }, false);
   }
 }

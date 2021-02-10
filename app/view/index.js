@@ -68,7 +68,10 @@ export default class View {
     plusButton.addEventListener('click', event => {
       event.preventDefault();
       if (input.value !== '') {
-        mediator.publish('addInput', input.value);
+        model.todo.text = input.value;
+        mediator.publish('addInput', model.todo);
+        //mediator.publish('addInput', input.value);
+        //mediator.publish('showModal', model.todo);
         input.value = '';
       }
     });
