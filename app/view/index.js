@@ -3,12 +3,14 @@ import {formTpl} from "../templates/formTpl";
 import {mediator} from "../root";
 import DOM from '../utilities/DOM'
 import ModalView from "./modalView";
+import SortView from "./sortView"
 
 export default class View {
   constructor() {
     this.app = DOM.getElement(document, '#root');
     this.template = DOM.createElement('div', 'wrapper');
     this.modalView = new ModalView(this);
+    this.sortView = new SortView();
   }
 
   reRenderTodo(view, filteredCollection) {
@@ -62,13 +64,18 @@ export default class View {
     });
   }
 
-  attachListener({plusButton, input, all, active, completed, clear_completed}, model, view) {
+  attachListener({plusButton, input, all, active, completed, clear_completed, sortingButton}, model, view) {
     plusButton.addEventListener('click', event => {
       event.preventDefault();
       if (input.value !== '') {
         mediator.publish('addInput', input.value);
         input.value = '';
       }
+    });
+
+    sortingButton.addEventListener('click', event => {
+      event.preventDefault();
+      mediator.publish('showSortingBlock', model.todos, view);
     });
 
     all.addEventListener('click', event => {
@@ -105,8 +112,9 @@ export default class View {
     let active = DOM.getElement(template, '.active');
     let completed = DOM.getElement(template, '.completed');
     let clear_completed = DOM.getElement(template, '.clear_completed');
+    let sortingButton = DOM.getElement(template, '.sorting');
 
-    return {todoList, plusButton, input, leftItems, all, active, completed, clear_completed}
+    return {todoList, plusButton, input, leftItems, all, active, completed, clear_completed, sortingButton}
   }
 
 }

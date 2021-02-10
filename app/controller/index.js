@@ -19,6 +19,7 @@ export default class Controller {
     mediator.subscribe('filterActiveItems', this.model.filterActiveItems.bind(this.model));
     mediator.subscribe('filterCompletedItems', this.model.filterCompletedItems.bind(this.model));
     mediator.subscribe('deleteCompletedItems', this.model.deleteCompletedItems.bind(this.model));
+    mediator.subscribe('showSortingBlock', view.sortView.renderSortBlock.bind(view.sortView));
   }
 }
 

@@ -140,7 +140,7 @@ h1 {
     background-image: url("img/sort.svg");
     background-repeat: no-repeat;
     background-size: 100%;
-    color:#EFEFEF
+    color: #EFEFEF
 }
 
 .modal__input {
@@ -189,6 +189,13 @@ h1 {
     font-size: 16px;
     margin: 0 8px;
     border-radius: 8px;
+}
+
+.sort {
+    margin-top: 40px;
+    width: 568px;
+    display: flex;
+    justify-content: space-between;
 }
 
 .todo-list {
