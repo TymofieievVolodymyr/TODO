@@ -22,6 +22,7 @@ export default class Model {
       text: todoText,
       creationDate: getToday(),
       expirationDate: getTomorrow(),
+      done: false,
       leftItems: null,
     }
 

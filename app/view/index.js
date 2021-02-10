@@ -12,19 +12,13 @@ export default class View {
   }
 
   reRenderTodo(view) {
-    this.todoList = DOM.getElement(view.template, '.todo-list');
+    const foundElementsSet = view.queryElement(view.template);
 
-    while (this.todoList.firstChild) {
-      DOM.removeNode(this.todoList.firstChild);
+    while (foundElementsSet.todoList.firstChild) {
+      DOM.removeNode(foundElementsSet.todoList.firstChild);
     }
 
-    this.todos.forEach(todo => {
-      const liItemInstance = new ListItemView();
-      const liItem = liItemInstance.render(todo, view);
-      DOM.append(this.todoList, liItem.liElement);
-      view.renderActiveItems(this, view, todo);
-    });
-
+    view.todosIteration(this, foundElementsSet, view);
   }
 
   renderListTodo(view) {
@@ -32,13 +26,7 @@ export default class View {
     DOM.append(view.app, view.template);
     const foundElementsSet = view.queryElement(view.template);
 
-    this.todos.forEach(todo => {
-      const liItemInstance = new ListItemView();
-      const liItem = liItemInstance.render(todo, view);
-      DOM.append(foundElementsSet.todoList, liItem.liElement);
-      view.renderActiveItems(this, view, todo);
-    });
-
+    view.todosIteration(this, foundElementsSet, view);
     view.attachListener(foundElementsSet);
   }
 
@@ -54,12 +42,20 @@ export default class View {
   }
 
   renderNoItems(text, view) {
-
     const itemsLeftElement = DOM.getElement(view.template, '.left');
     if (itemsLeftElement.firstChild) {
       DOM.removeNode(itemsLeftElement.firstChild);
     }
     DOM.addContentStart(itemsLeftElement, text);
+  }
+
+  todosIteration(todosCollection, foundElementsSet, view) {
+    todosCollection.todos.forEach(todo => {
+      const liItemInstance = new ListItemView();
+      const liItem = liItemInstance.render(todo, view);
+      DOM.append(foundElementsSet.todoList, liItem.liElement);
+      view.renderActiveItems(todosCollection, view, todo);
+    });
   }
 
   attachListener({plusButton, input, all, active, completed, clear_completed}) {
@@ -73,22 +69,19 @@ export default class View {
 
     all.addEventListener('click', event => {
       event.preventDefault();
-      console.log('all');
     });
 
     active.addEventListener('click', event => {
       event.preventDefault();
-      console.log('active');
+      //
     });
 
     completed.addEventListener('click', event => {
       event.preventDefault();
-      console.log('completed');
     });
 
     clear_completed.addEventListener('click', event => {
       event.preventDefault();
-      console.log('clear_completed');
     });
   }
 
