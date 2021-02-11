@@ -99,54 +99,31 @@ export default class Model {
 
   sortAscending(todosCollection, view) {
     const sortAscending = todosCollection.sort((firstTodoItem, secondTodoItem) => {
-      if (firstTodoItem.text < secondTodoItem.text) {
-        return -1;
-      }
-      if (firstTodoItem.text > secondTodoItem.text) {
-        return 1;
-      }
-      return 0;
-    });
+      return firstTodoItem.text === secondTodoItem.text ? 0 : firstTodoItem.text > secondTodoItem.text ? 1 : -1;
+    })
     mediator.publish('reRenderFullList', view, sortAscending);
   }
 
   sortDescending(todosCollection, view) {
     const descending = todosCollection.sort((firstTodoItem, secondTodoItem) => {
-      if (firstTodoItem.text > secondTodoItem.text) {
-        return -1;
-      }
-      if (firstTodoItem.text < secondTodoItem.text) {
-        return 1;
-      }
-      return 0;
-    });
+      return firstTodoItem.text === secondTodoItem.text ? 0 : firstTodoItem.text < secondTodoItem.text ? 1 :-1;
+    })
     mediator.publish('reRenderFullList', view, descending);
   }
 
   sortAscendingDate(todosCollection, view) {
-    console.log(todosCollection);
     const sortAscendingDate = todosCollection.sort((firstTodoItem, secondTodoItem) => {
-      if (firstTodoItem.startDate < secondTodoItem.startDate) {
-        return -1;
-      }
-      if (firstTodoItem.startDate > secondTodoItem.startDate) {
-        return 1;
-      }
-      return 0;
+      return firstTodoItem.text === secondTodoItem.startDate ? 0 : firstTodoItem.startDate > secondTodoItem.startDate ? 1 : -1;
     });
     mediator.publish('reRenderFullList', view, sortAscendingDate);
   }
 
   sortDescendingDate(todosCollection, view) {
     const sortDescendingDate = todosCollection.sort((firstTodoItem, secondTodoItem) => {
-      if (firstTodoItem.startDate > secondTodoItem.startDate) {
-        return -1;
-      }
-      if (firstTodoItem.startDate < secondTodoItem.startDate) {
-        return 1;
-      }
-      return 0;
+      return firstTodoItem.text === secondTodoItem.startDate ? 0 : firstTodoItem.startDate < secondTodoItem.startDate ? 1 : -1;
     });
+
+
 
     mediator.publish('reRenderFullList', view, sortDescendingDate);
   }
