@@ -70,8 +70,6 @@ export default class View {
       if (input.value !== '') {
         model.todo.text = input.value;
         mediator.publish('addInput', model.todo);
-        //mediator.publish('addInput', input.value);
-        //mediator.publish('showModal', model.todo);
         input.value = '';
       }
     });

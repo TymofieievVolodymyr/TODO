@@ -2,19 +2,20 @@ import {mediator, storage} from "../root";
 import formatDate from "../utilities/formatDate";
 import {nextDayDate} from "../utilities/formatDate";
 import {compose} from "../utilities/compose";
-import {pareString} from "../utilities/parseString";
+import {parseString} from "../utilities/parseString";
+
 
 const getTodayString = compose(formatDate);
 const getTomorrowString = compose(formatDate, nextDayDate);
-const getTodayParsedString = compose(pareString, getTodayString);
-const getTomorrowParsedString = compose(pareString, getTomorrowString);
+const getTodayParsedString = compose(parseString, getTodayString);
+const getTomorrowParsedString = compose(parseString, getTomorrowString);
 
 
 export default class Model {
   constructor() {
     this.todos = JSON.parse(storage.getItem('todos')) ?? [];
     this.todo = {
-      id: this.todos.length > 0 ? this.todos[this.todos.length - 1].id + 1 : 1,
+      id: null,
       text: null,
       creationDate: getTodayString(),
       expirationDate: getTomorrowString(),
@@ -31,28 +32,13 @@ export default class Model {
   }
 
   addTodoItem(toDoItem) {
-    // const todo = {
-    //   id: this.todos.length > 0 ? this.todos[this.todos.length - 1].id + 1 : 1,
-    //   text: todoText,
-    //   creationDate: getTodayString(),
-    //   expirationDate: getTomorrowString(),
-    //   startDate: new Date(getTodayParsedString()),
-    //   endDate: new Date(getTomorrowParsedString()),
-    //   done: false,
-    //   leftItems: null,
-    // }
-
-    // this.todos = this.todos.map((todo) => {
-    //   return todo.id === toDoItem.id ? toDoItem : todo
-    // });
-
+    toDoItem.id = this.todos.length > 0 ? this.todos[this.todos.length - 1].id + 1 : 1;
+    console.log(toDoItem);
     this.todos.push(toDoItem);
     mediator.publish('showModal', toDoItem);
-    //this.attach(this.todos);
   }
 
   editTodoItem(toDoItem, view) {
-
     this.todos = this.todos.map((todo) => {
       return todo.id === toDoItem.id ? toDoItem : todo
     });
@@ -138,39 +124,29 @@ export default class Model {
 
   sortAscendingDate(todosCollection, view) {
     console.log(todosCollection);
-    // const sortAscending = todosCollection.sort((firstTodoItem, secondTodoItem) => {
-    //   if (firstTodoItem.startDate < secondTodoItem.text) {
-    //     return -1;
-    //   }
-    //   if (firstTodoItem.text > secondTodoItem.text) {
-    //     return 1;
-    //   }
-    //   return 0;
-    // });
-
-
     const sortAscendingDate = todosCollection.sort((firstTodoItem, secondTodoItem) => {
-      return firstTodoItem.startDate - secondTodoItem.startDate;
+      if (firstTodoItem.startDate < secondTodoItem.startDate) {
+        return -1;
+      }
+      if (firstTodoItem.startDate > secondTodoItem.startDate) {
+        return 1;
+      }
+      return 0;
     });
-    console.log(sortAscendingDate);
-    //mediator.publish('reRenderFullList', view, sortAscendingDate);
+    mediator.publish('reRenderFullList', view, sortAscendingDate);
   }
 
   sortDescendingDate(todosCollection, view) {
-    console.log('sortDescendingDate');
-    // const sortAscending = todosCollection.sort((firstTodoItem, secondTodoItem) => {
-    //   if (firstTodoItem.text < secondTodoItem.text) {
-    //     return -1;
-    //   }
-    //   if (firstTodoItem.text > secondTodoItem.text) {
-    //     return 1;
-    //   }
-    //   return 0;
-    // });
-
     const sortDescendingDate = todosCollection.sort((firstTodoItem, secondTodoItem) => {
-      return firstTodoItem.endDate - secondTodoItem.endDate;
+      if (firstTodoItem.startDate > secondTodoItem.startDate) {
+        return -1;
+      }
+      if (firstTodoItem.startDate < secondTodoItem.startDate) {
+        return 1;
+      }
+      return 0;
     });
+
     mediator.publish('reRenderFullList', view, sortDescendingDate);
   }
 }

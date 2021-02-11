@@ -193,9 +193,9 @@ h1 {
 
 .sort {
     margin-top: 40px;
-    width: 568px;
-    display: flex;
-    justify-content: space-between;
+    /*width: 568px;*/
+    /*display: flex;*/
+    /*justify-content: space-between;*/
 }
 
 .todo-list {
@@ -239,6 +239,10 @@ h1 {
     background-color: lightblue;
     border-radius: 10px;
     cursor: pointer;
+}
+
+.row {
+    text-align: center;
 }
 
 

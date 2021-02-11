@@ -4,10 +4,8 @@ import {sortBlockTpl} from "../../templates/sortBlockTpl";
 
 
 export default class SortView {
-
   renderSortBlock(todosCollection, view) {
     this.queryElementAndAssignData(todosCollection, view);
-    //this.attachListenersAndFireEvent(toDoItem, this.view);
     this.attachListenersAndFireEvent(todosCollection, view);
   }
 
@@ -17,9 +15,11 @@ export default class SortView {
       DOM.addContentEnd(view.template, sortBlockTpl);
     }
     this.sortByTextAscend = DOM.getElement(view.template, '.sortByTextAscend');
-    this.sortByDescent = DOM.getElement(view.template, '.sortByDescent');
-    this.sortByDateCreated = DOM.getElement(view.template, '.sortByDateCreated');
-    this.sortByDateExpired = DOM.getElement(view.template, '.sortByDateExpired');
+    this.sortByDateCreatedAscend = DOM.getElement(view.template, '.sortByDateCreatedAscend');
+    this.sortByExpirationAscend = DOM.getElement(view.template, '.sortByExpirationAscend');
+    this.sortByTextDescent = DOM.getElement(view.template, '.sortByTextDescent');
+    this.sortByDateCreatedDescent = DOM.getElement(view.template, '.sortByDateCreatedDescent');
+    this.sortByDateExpirationDescent = DOM.getElement(view.template, '.sortByDateExpirationDescent');
   }
 
   attachListenersAndFireEvent(todosCollection, view) {
@@ -27,16 +27,25 @@ export default class SortView {
       mediator.publish('sortAscending', todosCollection, view);
     }, false);
 
-    this.sortByDescent.addEventListener('click', () => {
-      mediator.publish('sortDescending', todosCollection, view);
-    }, false);
-
-    this.sortByDateCreated.addEventListener('click', () => {
+    this.sortByDateCreatedAscend.addEventListener('click', () => {
       mediator.publish('sortAscendingDate', todosCollection, view);
     }, false);
 
-    this.sortByDateExpired.addEventListener('click', () => {
+    this.sortByExpirationAscend.addEventListener('click', () => {
+      mediator.publish('sortAscendingDate', todosCollection, view);
+    }, false);
+
+    this.sortByTextDescent.addEventListener('click', () => {
+      mediator.publish('sortDescending', todosCollection, view);
+    }, false);
+
+    this.sortByDateCreatedDescent.addEventListener('click', () => {
       mediator.publish('sortDescendingDate', todosCollection, view);
     }, false);
+
+    this.sortByDateExpirationDescent.addEventListener('click', () => {
+      mediator.publish('sortDescendingDate', todosCollection, view);
+    }, false);
+
   }
 }
