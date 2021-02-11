@@ -11,23 +11,23 @@ export default class ModalView {
   }
 
   renderPopUp(toDoItem) {
-    this.queryElementAndAssignData(toDoItem);
+    this.queryElementAndAssignData(toDoItem, this.view);
     this.attachListenersAndFireEvent(toDoItem, this.view);
   }
 //TODO refactor arguments in this method;
-  queryElementAndAssignData(toDoItem) {
-    DOM.addContentStart(this.body, modalTpl);
-    this.modal = DOM.getElement(this.body, '.modal');
+  queryElementAndAssignData(toDoItem, view) {
+    DOM.addContentStart(view.template, modalTpl);
+    this.modal = DOM.getElement(view.template, '.modal');
 
-    this.inputText = DOM.getElement(this.body, '.modal__input');
+    this.inputText = DOM.getElement(view.template, '.modal__input');
     this.inputText.value = toDoItem.text;
 
-    this.successButton = DOM.getElement(this.body, '.success');
-    this.rejectButton = DOM.getElement(this.body, '.reject');
+    this.successButton = DOM.getElement(view.template, '.success');
+    this.rejectButton = DOM.getElement(view.template, '.reject');
 
-    this.currentDate = DOM.getElement(this.body, '.creation');
+    this.currentDate = DOM.getElement(view.template, '.creation');
     this.currentDate.value = toDoItem.creationDate;
-    this.expirationDate = DOM.getElement(this.body, '.expiration');
+    this.expirationDate = DOM.getElement(view.template, '.expiration');
     this.expirationDate.value = toDoItem.expirationDate;
   }
 

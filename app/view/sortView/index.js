@@ -53,7 +53,7 @@ export default class SortView {
   }
 
   attachListenersAndFireEventFilter(view) {
-    this.filterText.addEventListener('keydown', () => {
+    this.filterText.addEventListener('keyup', () => {
       mediator.publish('filterText', this.filterText.value, view);
     }, false);
 
