@@ -17,8 +17,10 @@ export default class Model {
     this.todo = {
       id: null,
       text: null,
-      creationDate: getTodayString(),
-      expirationDate: getTomorrowString(),
+      // creationDate: getTodayString(),
+      // expirationDate: getTomorrowString(),
+      creationDate: null,
+      expirationDate: null,
       startDate: new Date(getTodayParsedString()),
       endDate: new Date(getTomorrowParsedString()),
       done: false,
@@ -33,7 +35,8 @@ export default class Model {
 
   addTodoItem(toDoItem) {
     toDoItem.id = this.todos.length > 0 ? this.todos[this.todos.length - 1].id + 1 : 1;
-    console.log(toDoItem);
+    toDoItem.creationDate = getTodayString();
+    toDoItem.expirationDate = getTomorrowString();
     this.todos.push(toDoItem);
     mediator.publish('showModal', toDoItem);
   }
