@@ -4,6 +4,7 @@ export const formTpl = `
       <div class="form__group">
         <input type="text" class="form__input" id="name" placeholder="Add Item" name="todo"/>
         <button class="add__item">+</button>
+        <button class="sorting">+</button>
       </div>
   </form>
   <ul class="todo-list">

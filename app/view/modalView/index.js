@@ -2,6 +2,7 @@ import DOM from "../../utilities/DOM";
 import {modalTpl} from "../../templates/modalTpl"
 import inputVerifier from "../../utilities/inputVerifier";
 import {mediator} from "../../root";
+import {convertDate} from "../../utilities/convertData";
 
 export default class ModalView {
   constructor(view) {
@@ -13,7 +14,7 @@ export default class ModalView {
     this.queryElementAndAssignData(toDoItem);
     this.attachListenersAndFireEvent(toDoItem, this.view);
   }
-
+//TODO refactor arguments in this method;
   queryElementAndAssignData(toDoItem) {
     DOM.addContentStart(this.body, modalTpl);
     this.modal = DOM.getElement(this.body, '.modal');
@@ -45,7 +46,8 @@ export default class ModalView {
         toDoItem.text = this.inputText.value;
         toDoItem.creationDate = this.currentDate.value;
         toDoItem.expirationDate = this.expirationDate.value;
-
+        toDoItem.startDate = convertDate(this.currentDate.value);
+        toDoItem.endDate = convertDate(this.expirationDate.value);
         mediator.publish('editInput', toDoItem, view);
 
         DOM.removeNode(this.modal);

@@ -2,13 +2,28 @@ import {mediator, storage} from "../root";
 import formatDate from "../utilities/formatDate";
 import {nextDayDate} from "../utilities/formatDate";
 import {compose} from "../utilities/compose";
+import {parseString} from "../utilities/parseString";
 
-const getToday = compose(formatDate);
-const getTomorrow = compose(formatDate, nextDayDate);
+
+const getTodayString = compose(formatDate);
+const getTomorrowString = compose(formatDate, nextDayDate);
+const getTodayParsedString = compose(parseString, getTodayString);
+const getTomorrowParsedString = compose(parseString, getTomorrowString);
+
 
 export default class Model {
   constructor() {
     this.todos = JSON.parse(storage.getItem('todos')) ?? [];
+    this.todo = {
+      id: null,
+      text: null,
+      creationDate: null,
+      expirationDate: null,
+      startDate: new Date(getTodayParsedString()),
+      endDate: new Date(getTomorrowParsedString()),
+      done: false,
+      leftItems: null,
+    }
     mediator.publish('fullList', this.todos);
   }
 
@@ -16,19 +31,12 @@ export default class Model {
     storage.setItem(JSON.stringify(todos));
   }
 
-  addTodoItem(todoText) {
-    const todo = {
-      id: this.todos.length > 0 ? this.todos[this.todos.length - 1].id + 1 : 1,
-      text: todoText,
-      creationDate: getToday(),
-      expirationDate: getTomorrow(),
-      done: false,
-      leftItems: null,
-    }
-
-    this.todos.push(todo);
-    mediator.publish('showModal', todo);
-    this.attach(this.todos);
+  addTodoItem(toDoItem) {
+    toDoItem.id = this.todos.length > 0 ? this.todos[this.todos.length - 1].id + 1 : 1;
+    toDoItem.creationDate = getTodayString();
+    toDoItem.expirationDate = getTomorrowString();
+    this.todos.push(toDoItem);
+    mediator.publish('showModal', toDoItem);
   }
 
   editTodoItem(toDoItem, view) {
@@ -87,5 +95,36 @@ export default class Model {
     });
     mediator.publish('reRenderFullList', view);
     this.attach(this.todos);
+  }
+
+  sortAscending(todosCollection, view) {
+    const sortAscending = todosCollection.sort((firstTodoItem, secondTodoItem) => {
+      return firstTodoItem.text === secondTodoItem.text ? 0 : firstTodoItem.text > secondTodoItem.text ? 1 : -1;
+    })
+    mediator.publish('reRenderFullList', view, sortAscending);
+  }
+
+  sortDescending(todosCollection, view) {
+    const descending = todosCollection.sort((firstTodoItem, secondTodoItem) => {
+      return firstTodoItem.text === secondTodoItem.text ? 0 : firstTodoItem.text < secondTodoItem.text ? 1 :-1;
+    })
+    mediator.publish('reRenderFullList', view, descending);
+  }
+
+  sortAscendingDate(todosCollection, view) {
+    const sortAscendingDate = todosCollection.sort((firstTodoItem, secondTodoItem) => {
+      return firstTodoItem.text === secondTodoItem.startDate ? 0 : firstTodoItem.startDate > secondTodoItem.startDate ? 1 : -1;
+    });
+    mediator.publish('reRenderFullList', view, sortAscendingDate);
+  }
+
+  sortDescendingDate(todosCollection, view) {
+    const sortDescendingDate = todosCollection.sort((firstTodoItem, secondTodoItem) => {
+      return firstTodoItem.text === secondTodoItem.startDate ? 0 : firstTodoItem.startDate < secondTodoItem.startDate ? 1 : -1;
+    });
+
+
+
+    mediator.publish('reRenderFullList', view, sortDescendingDate);
   }
 }

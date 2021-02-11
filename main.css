@@ -123,7 +123,7 @@ h1 {
     border-radius: 0.2rem;
     background-color: rgb(255, 255, 255);
     border: none;
-    width: 85%;
+    width: 75%;
     border-bottom: 0.3rem solid transparent;
     transition: all 0.3s;
 }
@@ -131,6 +131,16 @@ h1 {
 .add__item {
     padding: 26px;
     border-radius: 5px;
+}
+
+.sorting {
+    padding: 26px;
+    border-radius: 5px;
+    margin-left: 5px;
+    background-image: url("img/sort.svg");
+    background-repeat: no-repeat;
+    background-size: 100%;
+    color: #EFEFEF
 }
 
 .modal__input {
@@ -181,6 +191,13 @@ h1 {
     border-radius: 8px;
 }
 
+.sort {
+    margin-top: 40px;
+    /*width: 568px;*/
+    /*display: flex;*/
+    /*justify-content: space-between;*/
+}
+
 .todo-list {
     padding-left: 0;
 }
@@ -201,13 +218,13 @@ h1 {
     font-weight: bold;
 }
 
-.done{
+.done {
     text-decoration: line-through;
     color: lightslategray;
 }
 
 .footer {
-    margin-top:40px;
+    margin-top: 40px;
 }
 
 .filter {
@@ -221,7 +238,11 @@ h1 {
     padding: 5px;
     background-color: lightblue;
     border-radius: 10px;
-    cursor:pointer;
+    cursor: pointer;
+}
+
+.row {
+    text-align: center;
 }
 
 
