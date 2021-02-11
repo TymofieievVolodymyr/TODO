@@ -17,8 +17,6 @@ export default class Model {
     this.todo = {
       id: null,
       text: null,
-      // creationDate: getTodayString(),
-      // expirationDate: getTomorrowString(),
       creationDate: null,
       expirationDate: null,
       startDate: new Date(getTodayParsedString()),
