@@ -40,7 +40,7 @@ export default class Model {
   }
 
   editTodoItem(toDoItem, view) {
-    this.todos = this.todos.map((todo) => {
+    this.todos = this.todos.map(todo => {
       return todo.id === toDoItem.id ? toDoItem : todo
     });
 
@@ -49,7 +49,7 @@ export default class Model {
   }
 
   toggleDone(toDoItem, view) {
-    this.todos = this.todos.map((todo) => {
+    this.todos = this.todos.map(todo => {
       return todo.id === toDoItem.id ? {...toDoItem, done: !toDoItem.done} : todo
     });
 
@@ -58,7 +58,7 @@ export default class Model {
   }
 
   deleteItem(toDoItem, view) {
-    this.todos = this.todos.filter((todo) => {
+    this.todos = this.todos.filter(todo => {
       return todo.id !== toDoItem.id;
     });
 
@@ -70,7 +70,7 @@ export default class Model {
   }
 
   saveLeftItems(itemsLeft, toDoItem) {
-    this.todos = this.todos.map((todo) => {
+    this.todos = this.todos.map(todo => {
       return todo.id === toDoItem.id ? {...toDoItem, leftItems: itemsLeft} : todo
     });
   }
@@ -90,7 +90,7 @@ export default class Model {
   }
 
   deleteCompletedItems(view) {
-    this.todos = this.todos.filter((todo) => {
+    this.todos = this.todos.filter(todo => {
       return !todo.done;
     });
     mediator.publish('reRenderFullList', view);
@@ -106,7 +106,7 @@ export default class Model {
 
   sortDescending(todosCollection, view) {
     const descending = todosCollection.sort((firstTodoItem, secondTodoItem) => {
-      return firstTodoItem.text === secondTodoItem.text ? 0 : firstTodoItem.text < secondTodoItem.text ? 1 :-1;
+      return firstTodoItem.text === secondTodoItem.text ? 0 : firstTodoItem.text < secondTodoItem.text ? 1 : -1;
     })
     mediator.publish('reRenderFullList', view, descending);
   }
@@ -122,9 +122,27 @@ export default class Model {
     const sortDescendingDate = todosCollection.sort((firstTodoItem, secondTodoItem) => {
       return firstTodoItem.text === secondTodoItem.startDate ? 0 : firstTodoItem.startDate < secondTodoItem.startDate ? 1 : -1;
     });
-
-
-
     mediator.publish('reRenderFullList', view, sortDescendingDate);
+  }
+
+  filterText(inputData, view) {
+    const filteredCollection = this.todos.filter(todo => {
+      return todo.text.toLowerCase().includes(inputData.trim().toLowerCase());
+    });
+    mediator.publish('reRenderFullList', view, filteredCollection);
+  }
+
+  filterStartDate(inputData, view) {
+    const filteredCollection = this.todos.filter(todo => {
+      return todo.creationDate === inputData;
+    });
+    mediator.publish('reRenderFullList', view, filteredCollection);
+  }
+
+  filterExpirationDate(inputData, view) {
+    const filteredCollection = this.todos.filter(todo => {
+      return todo.expirationDate === inputData;
+    });
+    mediator.publish('reRenderFullList', view, filteredCollection);
   }
 }

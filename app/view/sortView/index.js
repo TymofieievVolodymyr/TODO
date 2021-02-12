@@ -6,7 +6,8 @@ import {sortBlockTpl} from "../../templates/sortBlockTpl";
 export default class SortView {
   renderSortBlock(todosCollection, view) {
     this.queryElementAndAssignData(todosCollection, view);
-    this.attachListenersAndFireEvent(todosCollection, view);
+    this.attachListenersAndFireEventSort(todosCollection, view);
+    this.attachListenersAndFireEventFilter(view);
   }
 
   queryElementAndAssignData(todosCollection, view) {
@@ -20,9 +21,12 @@ export default class SortView {
     this.sortByTextDescent = DOM.getElement(view.template, '.sortByTextDescent');
     this.sortByDateCreatedDescent = DOM.getElement(view.template, '.sortByDateCreatedDescent');
     this.sortByDateExpirationDescent = DOM.getElement(view.template, '.sortByDateExpirationDescent');
+    this.filterText = DOM.getElement(view.template, '#filterText');
+    this.startDate = DOM.getElement(view.template, '#startDate');
+    this.expirationDate = DOM.getElement(view.template, '#expirationDate');
   }
 
-  attachListenersAndFireEvent(todosCollection, view) {
+  attachListenersAndFireEventSort(todosCollection, view) {
     this.sortByTextAscend.addEventListener('click', () => {
       mediator.publish('sortAscending', todosCollection, view);
     }, false);
@@ -46,6 +50,19 @@ export default class SortView {
     this.sortByDateExpirationDescent.addEventListener('click', () => {
       mediator.publish('sortDescendingDate', todosCollection, view);
     }, false);
+  }
 
+  attachListenersAndFireEventFilter(view) {
+    this.filterText.addEventListener('keyup', () => {
+      mediator.publish('filterText', this.filterText.value, view);
+    }, false);
+
+    this.startDate.addEventListener('change', () => {
+      mediator.publish('filterStartDate', this.startDate.value, view);
+    }, false);
+
+    this.expirationDate.addEventListener('change', () => {
+      mediator.publish('filterExpirationDate', this.expirationDate.value, view);
+    }, false);
   }
 }

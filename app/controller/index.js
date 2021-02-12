@@ -2,7 +2,6 @@ import {mediator} from "../root";
 
 export default class Controller {
   constructor(model, view) {
-
     this.model = model;
     this.view = view;
 
@@ -24,6 +23,9 @@ export default class Controller {
     mediator.subscribe('sortDescending', this.model.sortDescending.bind(this.model));
     mediator.subscribe('sortAscendingDate', this.model.sortAscendingDate.bind(this.model));
     mediator.subscribe('sortDescendingDate', this.model.sortDescendingDate.bind(this.model));
+    mediator.subscribe('filterText', this.model.filterText.bind(this.model));
+    mediator.subscribe('filterStartDate', this.model.filterStartDate.bind(this.model));
+    mediator.subscribe('filterExpirationDate', this.model.filterExpirationDate.bind(this.model));
   }
 }
 

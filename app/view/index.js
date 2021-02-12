@@ -68,7 +68,7 @@ export default class View {
     plusButton.addEventListener('click', event => {
       event.preventDefault();
       if (input.value !== '') {
-        model.todo.text = input.value;
+        model.todo.text = input.value.trim();
         mediator.publish('addInput', model.todo);
         input.value = '';
       }
