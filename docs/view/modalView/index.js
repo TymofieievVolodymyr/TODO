@@ -1,7 +1,7 @@
 import DOM from "../../utilities/DOM";
 import {modalTpl} from "../../templates/modalTpl"
 import inputVerifier from "../../utilities/inputVerifier";
-import {mediator} from "../../root";
+import {mediator} from "../../startPoint";
 import {convertDate} from "../../utilities/convertData";
 
 export default class ModalView {

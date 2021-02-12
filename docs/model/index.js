@@ -1,4 +1,4 @@
-import {mediator, storage} from "../root";
+import {mediator, storage} from "../startPoint";
 import formatDate from "../utilities/formatDate";
 import {nextDayDate} from "../utilities/formatDate";
 import {compose} from "../utilities/compose";
