@@ -1,4 +1,3 @@
-//export default
 class DOM {
   static document = document;
 

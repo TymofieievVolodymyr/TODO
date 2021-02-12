@@ -1,4 +1,3 @@
-//export default
 function formatDate(date) {
   let d = date ?? new Date();
   let month = '' + (d.getMonth() + 1);

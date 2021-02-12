@@ -1,4 +1,3 @@
-//export
 const modalTpl = `
 <div class="modal">  
   <input type="text" class="modal__input">

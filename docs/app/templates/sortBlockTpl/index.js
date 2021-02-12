@@ -1,4 +1,3 @@
-//export
 const sortBlockTpl = `
 <div class="sort">
   <div class ="row">

@@ -1,4 +1,3 @@
-//export
 const formTpl = `
   <h1>todos</h1>
   <form>

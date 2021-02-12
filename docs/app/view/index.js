@@ -1,11 +1,3 @@
-// import ListItemView from "./listItemView";
-// import {formTpl} from "../templates/formTpl";
-// import {mediator} from "../root";
-// import DOM from '../utilities/DOM'
-// import ModalView from "./modalView";
-// import SortView from "./sortView"
-
-//export default
 class View {
   constructor() {
     this.app = DOM.getElement(document, '#root');

@@ -1,10 +1,3 @@
-// import DOM from "../../utilities/DOM";
-// import {modalTpl} from "../../templates/modalTpl"
-// import inputVerifier from "../../utilities/inputVerifier";
-// import {mediator} from "../../root";
-// import {convertDate} from "../../utilities/convertData";
-
-//export default
 class ModalView {
   constructor(view) {
     this.body = DOM.getElement(document, 'body');
@@ -15,7 +8,7 @@ class ModalView {
     this.queryElementAndAssignData(toDoItem, this.view);
     this.attachListenersAndFireEvent(toDoItem, this.view);
   }
-//TODO refactor arguments in this method;
+
   queryElementAndAssignData(toDoItem, view) {
     DOM.addContentStart(view.template, modalTpl);
     this.modal = DOM.getElement(view.template, '.modal');

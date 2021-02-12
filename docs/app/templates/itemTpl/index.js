@@ -1,4 +1,3 @@
-//export
 const itemTpl = `
 <li>
   <input type="checkbox" class="input__checkbox">
