@@ -1,4 +1,4 @@
-import App from './startPoint';
+import App from './root';
 
 const todoApp = new App();
 todoApp.render();
