@@ -1,4 +1,4 @@
-export default class  PubSub {
+class  PubSub {
 
   constructor() {
     this._events = {};

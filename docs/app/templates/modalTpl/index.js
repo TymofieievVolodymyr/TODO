@@ -1,4 +1,4 @@
-export const modalTpl = `
+const modalTpl = `
 <div class="modal">  
   <input type="text" class="modal__input">
   <label for="creation">Creation date</label>

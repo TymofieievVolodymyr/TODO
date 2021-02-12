@@ -1,4 +1,4 @@
-export default class SaveToLocalStorage {
+class SaveToLocalStorage {
   constructor() {
     this.local = localStorage;
   }

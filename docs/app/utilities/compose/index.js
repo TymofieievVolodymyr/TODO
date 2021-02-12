@@ -1,1 +1,1 @@
-export const compose = (...fns) => (initialVal) => fns.reduceRight((val, fn) => fn(val), initialVal);
+const compose = (...fns) => (initialVal) => fns.reduceRight((val, fn) => fn(val), initialVal);

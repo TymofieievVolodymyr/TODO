@@ -1,9 +1,4 @@
-import DOM from "../../utilities/DOM";
-import {mediator} from "../../root";
-import {sortBlockTpl} from "../../templates/sortBlockTpl";
-
-
-export default class SortView {
+class SortView {
   renderSortBlock(todosCollection, view) {
     this.queryElementAndAssignData(todosCollection, view);
     this.attachListenersAndFireEventSort(todosCollection, view);

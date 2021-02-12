@@ -1,17 +1,11 @@
-import {mediator, storage} from "../root";
-import formatDate from "../utilities/formatDate";
-import {nextDayDate} from "../utilities/formatDate";
-import {compose} from "../utilities/compose";
-import {parseString} from "../utilities/parseString";
-
-
 const getTodayString = compose(formatDate);
 const getTomorrowString = compose(formatDate, nextDayDate);
 const getTodayParsedString = compose(parseString, getTodayString);
 const getTomorrowParsedString = compose(parseString, getTomorrowString);
 
 
-export default class Model {
+//export default
+class Model {
   constructor() {
     this.todos = JSON.parse(storage.getItem('todos')) ?? [];
     this.todo = {

@@ -1,4 +1,4 @@
-export const itemTpl = `
+const itemTpl = `
 <li>
   <input type="checkbox" class="input__checkbox">
   <span class="text"></span>

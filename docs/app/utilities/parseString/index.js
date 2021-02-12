@@ -1,1 +1,1 @@
-export const parseString = stringDate => stringDate.split('-').join();
+const parseString = stringDate => stringDate.split('-').join();

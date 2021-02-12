@@ -1,4 +1,4 @@
-export default function formatDate(date) {
+function formatDate(date) {
   let d = date ?? new Date();
   let month = '' + (d.getMonth() + 1);
   let day = '' + d.getDate();
@@ -14,7 +14,8 @@ export default function formatDate(date) {
   return [year, month, day].join('-');
 }
 
-export function nextDayDate() {
+//export
+function nextDayDate() {
   const date = new Date();
    date.setDate(date.getDate() + 1);
   return date;
