@@ -1,4 +1,4 @@
-import App from './TODO/app/rootPoint';
+import App from './TODO/app/root';
 
 const todoApp = new App();
 todoApp.render();
