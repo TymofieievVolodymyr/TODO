@@ -1,5 +1,5 @@
 import DOM from "../../utilities/DOM";
-import {mediator} from "../../../root";
+import {mediator} from "../../root";
 import {sortBlockTpl} from "../../templates/sortBlockTpl";
 
 
