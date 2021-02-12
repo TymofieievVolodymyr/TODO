@@ -1,8 +1,8 @@
-import {mediator, storage} from "../app/root";
-import formatDate from "../app/utilities/formatDate";
-import {nextDayDate} from "../app/utilities/formatDate";
-import {compose} from "../app/utilities/compose";
-import {parseString} from "../app/utilities/parseString";
+import {mediator, storage} from "../root";
+import formatDate from "../utilities/formatDate";
+import {nextDayDate} from "../utilities/formatDate";
+import {compose} from "../utilities/compose";
+import {parseString} from "../utilities/parseString";
 
 
 const getTodayString = compose(formatDate);
