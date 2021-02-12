@@ -1,4 +1,4 @@
-import {mediator} from "../../root";
+import {mediator} from "../root";
 
 export default class Controller {
   constructor(model, view) {

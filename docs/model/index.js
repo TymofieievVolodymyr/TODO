@@ -1,4 +1,4 @@
-import {mediator, storage} from "../root";
+import {mediator, storage} from "../app/root";
 import formatDate from "../app/utilities/formatDate";
 import {nextDayDate} from "../app/utilities/formatDate";
 import {compose} from "../app/utilities/compose";
