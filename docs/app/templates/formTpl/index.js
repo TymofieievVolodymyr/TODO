@@ -1,4 +1,5 @@
-export const formTpl = `
+//export
+const formTpl = `
   <h1>todos</h1>
   <form>
       <div class="form__group">

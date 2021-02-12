@@ -1,10 +1,11 @@
-import DOM from "../../utilities/DOM";
-import {modalTpl} from "../../templates/modalTpl"
-import inputVerifier from "../../utilities/inputVerifier";
-import {mediator} from "../../root";
-import {convertDate} from "../../utilities/convertData";
+// import DOM from "../../utilities/DOM";
+// import {modalTpl} from "../../templates/modalTpl"
+// import inputVerifier from "../../utilities/inputVerifier";
+// import {mediator} from "../../root";
+// import {convertDate} from "../../utilities/convertData";
 
-export default class ModalView {
+//export default
+class ModalView {
   constructor(view) {
     this.body = DOM.getElement(document, 'body');
     this.view = view;

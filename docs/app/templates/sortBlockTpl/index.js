@@ -1,4 +1,5 @@
-export const sortBlockTpl = `
+//export
+const sortBlockTpl = `
 <div class="sort">
   <div class ="row">
   <button class="sortByTextAscend">Text ⬆️</button>

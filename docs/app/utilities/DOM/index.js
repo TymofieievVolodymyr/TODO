@@ -1,4 +1,5 @@
-export default class DOM {
+//export default
+class DOM {
   static document = document;
 
   static createElement(tag, className) {

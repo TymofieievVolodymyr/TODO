@@ -1,4 +1,4 @@
-import App from './app/root';
+//import App from './app/root';
 
 const todoApp = new App();
 todoApp.render();
