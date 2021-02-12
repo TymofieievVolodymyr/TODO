@@ -145,5 +145,4 @@ export default class Model {
     });
     mediator.publish('reRenderFullList', view, filteredCollection);
   }
-
 }
