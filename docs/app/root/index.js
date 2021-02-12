@@ -1,6 +1,6 @@
 import PubSub from "../utilities/pubSub";
 import SaveToLocalStorage from "../utilities/localStorage";
-import Model from "../../model";
+import Model from "../model";
 import View from "../view";
 import Controller from "../controller";
 
