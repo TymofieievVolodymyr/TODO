@@ -127,21 +127,21 @@ export default class Model {
 
   filterText(inputData, view) {
     const filteredCollection = this.todos.filter(todo => {
-      return todo.text.toLowerCase().includes(inputData.toLowerCase());
+      return todo.text.toLowerCase().includes(inputData.trim().toLowerCase());
     });
     mediator.publish('reRenderFullList', view, filteredCollection);
   }
 
   filterStartDate(inputData, view) {
     const filteredCollection = this.todos.filter(todo => {
-      return todo.creationDate.includes(inputData);
+      return todo.creationDate === inputData;
     });
     mediator.publish('reRenderFullList', view, filteredCollection);
   }
 
   filterExpirationDate(inputData, view) {
     const filteredCollection = this.todos.filter(todo => {
-      return todo.expirationDate.includes(inputData);
+      return todo.expirationDate === inputData;
     });
     mediator.publish('reRenderFullList', view, filteredCollection);
   }
