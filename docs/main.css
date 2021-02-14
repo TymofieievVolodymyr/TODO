@@ -35,6 +35,7 @@ body {
 
 form {
     text-align: center;
+    margin-bottom: 10px;
 }
 
 h1 {
@@ -175,7 +176,7 @@ h1 {
 }
 
 .pencil {
-    background-color: #CCCCFF;
+    background-color: #7295E7;
     border: none;
     color: white;
     text-align: center;
@@ -218,7 +219,7 @@ h1 {
 }
 
 .todo-list li:hover {
-    background-color: gray;
+    background-color: #709DE5;
 }
 
 .todo-list li span {
@@ -243,7 +244,7 @@ h1 {
 .filter a {
     text-decoration: none;
     padding: 5px;
-    background-color: lightblue;
+    background-color: #709DE5;
     border-radius: 10px;
     cursor: pointer;
 }
