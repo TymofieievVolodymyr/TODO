@@ -2,13 +2,16 @@ class SortView {
   renderSortBlock(todosCollection, view) {
     this.queryElementAndAssignData(todosCollection, view);
     this.attachListenersAndFireEventSort(todosCollection, view);
-    this.attachListenersAndFireEventFilter(view);
+    //this.attachListenersAndFireEventFilter(view);
   }
 
   queryElementAndAssignData(todosCollection, view) {
     let existElementInDOM = DOM.getElement(view.template, '.sort');
+    let wrapSort = DOM.getElement(view.template, '.wrap-sort');
+
     if (!existElementInDOM) {
-      DOM.addContentEnd(view.template, sortBlockTpl);
+      //DOM.addContentEnd(view.template, sortBlockTpl);
+      DOM.addContentEnd(wrapSort, sortBlockTpl);
     } else {
       DOM.removeNode(existElementInDOM);
     }
@@ -36,30 +39,30 @@ class SortView {
       mediator.publish('sortAscendingDate', todosCollection, view);
     }, false);
 
-    this.sortByTextDescent.addEventListener('click', () => {
-      mediator.publish('sortDescending', todosCollection, view);
-    }, false);
+    // this.sortByTextDescent.addEventListener('click', () => {
+    //   mediator.publish('sortDescending', todosCollection, view);
+    // }, false);
 
-    this.sortByDateCreatedDescent.addEventListener('click', () => {
-      mediator.publish('sortDescendingDate', todosCollection, view);
-    }, false);
-
-    this.sortByDateExpirationDescent.addEventListener('click', () => {
-      mediator.publish('sortDescendingDate', todosCollection, view);
-    }, false);
+    // this.sortByDateCreatedDescent.addEventListener('click', () => {
+    //   mediator.publish('sortDescendingDate', todosCollection, view);
+    // }, false);
+    //
+    // this.sortByDateExpirationDescent.addEventListener('click', () => {
+    //   mediator.publish('sortDescendingDate', todosCollection, view);
+    // }, false);
   }
 
-  attachListenersAndFireEventFilter(view) {
-    this.filterText.addEventListener('keyup', () => {
-      mediator.publish('filterText', this.filterText.value, view);
-    }, false);
-
-    this.startDate.addEventListener('change', () => {
-      mediator.publish('filterStartDate', this.startDate.value, view);
-    }, false);
-
-    this.expirationDate.addEventListener('change', () => {
-      mediator.publish('filterExpirationDate', this.expirationDate.value, view);
-    }, false);
-  }
+  // attachListenersAndFireEventFilter(view) {
+  //   this.filterText.addEventListener('keyup', () => {
+  //     mediator.publish('filterText', this.filterText.value, view);
+  //   }, false);
+  //
+  //   this.startDate.addEventListener('change', () => {
+  //     mediator.publish('filterStartDate', this.startDate.value, view);
+  //   }, false);
+  //
+  //   this.expirationDate.addEventListener('change', () => {
+  //     mediator.publish('filterExpirationDate', this.expirationDate.value, view);
+  //   }, false);
+  // }
 }

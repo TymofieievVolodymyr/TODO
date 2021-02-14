@@ -7,10 +7,12 @@ const formTpl = `
         <button class="add__item">+</button>        
       </div>
   </form>
-  <div class ="row">
+  <div class="row">
     <button class="sortByTextAscend">Text ⬆️</button>
     <button class="sortByDateCreatedAscend">Created date ⬆️</button>
     <button class="sortByExpirationAscend">Expiration date ⬆️</button>
+  </div>
+  <div class="wrap-sort">
   </div>
   <ul class="todo-list">
   </ul>
