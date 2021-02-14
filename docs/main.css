@@ -148,7 +148,7 @@ h1 {
     background-image: url("img/sort.svg");
     background-repeat: no-repeat;
     background-size: 100%;
-    color: #EFEFEF
+    color: black;
 }
 
 .modal__input {

@@ -9,6 +9,8 @@ class SortView {
     let existElementInDOM = DOM.getElement(view.template, '.sort');
     if (!existElementInDOM) {
       DOM.addContentEnd(view.template, sortBlockTpl);
+    } else {
+      DOM.removeNode(existElementInDOM);
     }
     this.sortByTextAscend = DOM.getElement(view.template, '.sortByTextAscend');
     this.sortByDateCreatedAscend = DOM.getElement(view.template, '.sortByDateCreatedAscend');
