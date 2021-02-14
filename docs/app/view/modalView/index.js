@@ -11,6 +11,8 @@ class ModalView {
 
   queryElementAndAssignData(toDoItem, view) {
     DOM.addContentStart(view.template, modalTpl);
+
+    DOM.addClassToNode(this.body, 'backdrop');
     this.modal = DOM.getElement(view.template, '.modal');
 
     this.inputText = DOM.getElement(view.template, '.modal__input');
@@ -32,6 +34,7 @@ class ModalView {
 
     this.rejectButton.addEventListener('click', () => {
       DOM.removeNode(this.modal);
+      DOM.removeClassFromNode(this.body, 'backdrop');
     }, false);
 
     this.successButton.addEventListener('click', () => {
@@ -43,8 +46,8 @@ class ModalView {
         toDoItem.startDate = convertDate(this.currentDate.value);
         toDoItem.endDate = convertDate(this.expirationDate.value);
         mediator.publish('editInput', toDoItem, view);
-
         DOM.removeNode(this.modal);
+        DOM.removeClassFromNode(this.body, 'backdrop');
       } else {
         DOM.addClassToNode(this.inputText, 'invalid_input');
       }

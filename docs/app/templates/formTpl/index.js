@@ -1,10 +1,10 @@
 const formTpl = `
-  <h1>todos</h1>
+  <h1>Todos</h1>
   <form>
       <div class="form__group">
+      <button class="sorting">' '</button>
         <input type="text" class="form__input" id="name" placeholder="Add Item" name="todo"/>
-        <button class="add__item">+</button>
-        <button class="sorting">+</button>
+        <button class="add__item">+</button>        
       </div>
   </form>
   <ul class="todo-list">
