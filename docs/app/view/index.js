@@ -57,7 +57,7 @@ class View {
     });
   }
 
-  attachListener({plusButton, input, all, active, completed, clear_completed, sortingButton}, model, view) {
+  attachListener({plusButton, input, all, active, completed, clear_completed, sortingButton, form}, model, view) {
     plusButton.addEventListener('click', event => {
       event.preventDefault();
       if (input.value !== '') {
@@ -70,6 +70,12 @@ class View {
     sortingButton.addEventListener('click', event => {
       event.preventDefault();
       mediator.publish('showSortingBlock', model.todos, view);
+    });
+
+    form.addEventListener('keydown', event => {
+      if (event.key === "Enter") {
+        event.preventDefault();
+      }
     });
 
     all.addEventListener('click', event => {
@@ -107,8 +113,9 @@ class View {
     let completed = DOM.getElement(template, '.completed');
     let clear_completed = DOM.getElement(template, '.clear_completed');
     let sortingButton = DOM.getElement(template, '.sorting');
+    let form = DOM.getElement(template, 'form');
 
-    return {todoList, plusButton, input, leftItems, all, active, completed, clear_completed, sortingButton}
+    return {todoList, plusButton, input, leftItems, all, active, completed, clear_completed, sortingButton, form}
   }
 
 }
