@@ -26,7 +26,7 @@ class View {
     const foundElementsSet = view.queryElement(view.template);
 
     view.todosIteration(this.todos, foundElementsSet, view);
-    view.attachListener(foundElementsSet, this, view, this.todos);
+    view.attachListener(foundElementsSet, this, view);
   }
 
   renderRemainItems(model, view, todo) {
