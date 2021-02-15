@@ -1,8 +1,5 @@
 const getTodayString = compose(formatDate);
 const getTomorrowString = compose(formatDate, nextDayDate);
-const getTodayParsedString = compose(parseString, getTodayString);
-const getTomorrowParsedString = compose(parseString, getTomorrowString);
-
 
 class Model {
   constructor() {
@@ -90,11 +87,9 @@ class Model {
   }
 
   sortAscending(todosCollection, view) {
-    console.log(todosCollection);
     const sortAscending = todosCollection.sort((firstTodoItem, secondTodoItem) => {
       return firstTodoItem.text === secondTodoItem.text ? 0 : firstTodoItem.text > secondTodoItem.text ? 1 : -1;
     });
-    console.log(sortAscending);
     mediator.publish('reRenderFullList', view, sortAscending);
   }
 

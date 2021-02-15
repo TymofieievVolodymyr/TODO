@@ -94,6 +94,11 @@ class View {
     form.addEventListener('keydown', event => {
       if (event.key === "Enter") {
         event.preventDefault();
+        if (input.value !== '') {
+          model.todo.text = input.value.trim();
+          mediator.publish('showModalAddNewItem', model.todo);
+          input.value = '';
+        }
       }
     });
 
