@@ -80,38 +80,15 @@ class View {
     });
 
     sortByTextAscDesc.addEventListener('click', () => {
-      let existUp = DOM.containsClass(text, 'up');
-      if (existUp) {
-        mediator.publish('sortAscending', todosCollection, view);
-      } else {
-        mediator.publish('sortDescending', todosCollection, view);
-      }
-
-      DOM.toggleClass(text, 'up');
-      DOM.toggleClass(text, 'down');
+      view.toggleClassAndFireEvent(text, 'sortAscending', 'sortDescending', todosCollection, view);
     });
 
     sortByDateCreatedAscDesc.addEventListener('click', () => {
-      let existUp = DOM.containsClass(create, 'up');
-      if (existUp) {
-        mediator.publish('sortAscendingDate', todosCollection, view);
-      } else {
-        mediator.publish('sortDescendingDate', todosCollection, view);
-      }
-      DOM.toggleClass(create, 'up');
-      DOM.toggleClass(create, 'down');
+      view.toggleClassAndFireEvent(create, 'sortAscendingDate', 'sortDescendingDate', todosCollection, view);
     });
 
     sortByExpirationAscDesc.addEventListener('click', () => {
-      let existUp = DOM.containsClass(expiration, 'up');
-      if (existUp) {
-        mediator.publish('sortAscendingDate', todosCollection, view);
-      } else {
-        mediator.publish('sortDescendingDate', todosCollection, view);
-      }
-
-      DOM.toggleClass(expiration, 'up');
-      DOM.toggleClass(expiration, 'down');
+      view.toggleClassAndFireEvent(expiration, 'sortAscendingDate', 'sortDescendingDate', todosCollection, view);
     });
 
     form.addEventListener('keydown', event => {
@@ -143,6 +120,18 @@ class View {
 
   getActiveItemsData(todoList) {
     return `${todoList.length} item${todoList.length !== 1 ? 's' : ''} left`;
+  }
+
+  toggleClassAndFireEvent(element, eventAsc, eventDesc, collection, view) {
+    let existUp = DOM.containsClass(element, 'up');
+    if (existUp) {
+      mediator.publish(eventAsc, collection, view);
+    } else {
+      mediator.publish(eventDesc, collection, view);
+    }
+
+    DOM.toggleClass(element, 'up');
+    DOM.toggleClass(element, 'down');
   }
 
   queryElement(template) {
