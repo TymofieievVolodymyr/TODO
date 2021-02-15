@@ -64,7 +64,7 @@ class View {
                    sortByDateCreatedAscDesc, sortByExpirationAscDesc,
                    text, create, expiration
                  },
-                 model, view, todosCollection) {
+                 model, view) {
     plusButton.addEventListener('click', event => {
       event.preventDefault();
       if (input.value !== '') {
@@ -80,15 +80,15 @@ class View {
     });
 
     sortByTextAscDesc.addEventListener('click', () => {
-      view.toggleClassAndFireEvent(text, 'sortAscending', 'sortDescending', todosCollection, view);
+      view.toggleClassAndFireEvent(text, 'sortAscending', 'sortDescending', model.todos, view);
     });
 
     sortByDateCreatedAscDesc.addEventListener('click', () => {
-      view.toggleClassAndFireEvent(create, 'sortAscendingDate', 'sortDescendingDate', todosCollection, view);
+      view.toggleClassAndFireEvent(create, 'sortAscendingDate', 'sortDescendingDate', model.todos, view);
     });
 
     sortByExpirationAscDesc.addEventListener('click', () => {
-      view.toggleClassAndFireEvent(expiration, 'sortAscendingDate', 'sortDescendingDate', todosCollection, view);
+      view.toggleClassAndFireEvent(expiration, 'sortAscendingDate', 'sortDescendingDate', model.todos, view);
     });
 
     form.addEventListener('keydown', event => {

@@ -4,7 +4,6 @@ const getTodayParsedString = compose(parseString, getTodayString);
 const getTomorrowParsedString = compose(parseString, getTomorrowString);
 
 
-//export default
 class Model {
   constructor() {
     this.todos = JSON.parse(storage.getItem('todos')) ?? [];
@@ -13,8 +12,8 @@ class Model {
       text: null,
       creationDate: null,
       expirationDate: null,
-      startDate: new Date(getTodayParsedString()),
-      endDate: new Date(getTomorrowParsedString()),
+      startDate: null,
+      endDate: null,
       done: false,
       leftItems: null,
     }
@@ -26,12 +25,8 @@ class Model {
   }
 
   addTodoItem(toDoItem, view) {
-    console.log('addTodoItem');
     toDoItem.id = this.todos.length > 0 ? this.todos[this.todos.length - 1].id + 1 : 1;
-    // toDoItem.creationDate = getTodayString();
-    // toDoItem.expirationDate = getTomorrowString();
     this.todos.push(toDoItem);
-    //mediator.publish('showModal', toDoItem);
     mediator.publish('reRenderFullList', view);
     this.attach(this.todos);
   }
@@ -95,9 +90,11 @@ class Model {
   }
 
   sortAscending(todosCollection, view) {
+    console.log(todosCollection);
     const sortAscending = todosCollection.sort((firstTodoItem, secondTodoItem) => {
       return firstTodoItem.text === secondTodoItem.text ? 0 : firstTodoItem.text > secondTodoItem.text ? 1 : -1;
-    })
+    });
+    console.log(sortAscending);
     mediator.publish('reRenderFullList', view, sortAscending);
   }
 
