@@ -6,11 +6,20 @@ class ModalView {
 
   renderPopUp(toDoItem) {
     this.queryElementAndAssignData(toDoItem, this.view);
-    this.attachListenersAndFireEvent(toDoItem, this.view);
+    this.attachListenersAndFireEvent(toDoItem, this.view, 'editInput');
   }
 
-  queryElementAndAssignData(toDoItem, view) {
+  renderInitialPopUp(toDoItem) {
+    this.queryElementAndAssignData(toDoItem, this.view, this.initInitialDate);
+    this.attachListenersAndFireEvent(toDoItem, this.view, 'addInput');
+  }
+
+  queryElementAndAssignData(toDoItem, view, initDate) {
     DOM.addContentStart(view.template, modalTpl);
+
+    if (initDate) {
+      this.initInitialDate(toDoItem);
+    }
 
     DOM.addClassToNode(this.body, 'backdrop');
     this.modal = DOM.getElement(view.template, '.modal');
@@ -27,7 +36,7 @@ class ModalView {
     this.expirationDate.value = toDoItem.expirationDate;
   }
 
-  attachListenersAndFireEvent(toDoItem, view) {
+  attachListenersAndFireEvent(toDoItem, view, customEventType) {
     this.inputText.addEventListener('keydown', () => {
       DOM.removeClassFromNode(this.inputText, 'invalid_input');
     }, false);
@@ -45,12 +54,17 @@ class ModalView {
         toDoItem.expirationDate = this.expirationDate.value;
         toDoItem.startDate = convertDate(this.currentDate.value);
         toDoItem.endDate = convertDate(this.expirationDate.value);
-        mediator.publish('editInput', toDoItem, view);
+        mediator.publish(customEventType, toDoItem, view);
         DOM.removeNode(this.modal);
         DOM.removeClassFromNode(this.body, 'backdrop');
       } else {
         DOM.addClassToNode(this.inputText, 'invalid_input');
       }
     }, false);
+  }
+
+  initInitialDate(toDoItem) {
+    toDoItem.creationDate = getTodayString();
+    toDoItem.expirationDate = getTomorrowString();
   }
 }

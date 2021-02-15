@@ -69,7 +69,7 @@ class View {
       event.preventDefault();
       if (input.value !== '') {
         model.todo.text = input.value.trim();
-        mediator.publish('addInput', model.todo);
+        mediator.publish('showModalAddNewItem', model.todo);
         input.value = '';
       }
     });

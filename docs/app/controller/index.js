@@ -9,6 +9,7 @@ class Controller {
     mediator.subscribe('addInput', this.model.addTodoItem.bind(this.model));
     mediator.subscribe('editInput', this.model.editTodoItem.bind(this.model));
     mediator.subscribe('showModal', view.modalView.renderPopUp.bind(view.modalView));
+    mediator.subscribe('showModalAddNewItem', view.modalView.renderInitialPopUp.bind(view.modalView));
     mediator.subscribe('toggleComplete', this.model.toggleDone.bind(this.model));
     mediator.subscribe('delete', this.model.deleteItem.bind(this.model));
     mediator.subscribe('saveLeftItems', this.model.saveLeftItems.bind(this.model));

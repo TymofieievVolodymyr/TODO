@@ -25,12 +25,15 @@ class Model {
     storage.setItem(JSON.stringify(todos));
   }
 
-  addTodoItem(toDoItem) {
+  addTodoItem(toDoItem, view) {
+    console.log('addTodoItem');
     toDoItem.id = this.todos.length > 0 ? this.todos[this.todos.length - 1].id + 1 : 1;
-    toDoItem.creationDate = getTodayString();
-    toDoItem.expirationDate = getTomorrowString();
+    // toDoItem.creationDate = getTodayString();
+    // toDoItem.expirationDate = getTomorrowString();
     this.todos.push(toDoItem);
-    mediator.publish('showModal', toDoItem);
+    //mediator.publish('showModal', toDoItem);
+    mediator.publish('reRenderFullList', view);
+    this.attach(this.todos);
   }
 
   editTodoItem(toDoItem, view) {
