@@ -26,7 +26,7 @@ class View {
     const foundElementsSet = view.queryElement(view.template);
 
     view.todosIteration(this.todos, foundElementsSet, view);
-    view.attachListener(foundElementsSet, this, view);
+    view.attachListener(foundElementsSet, this, view, this.todos);
   }
 
   renderRemainItems(model, view, todo) {
@@ -57,7 +57,14 @@ class View {
     });
   }
 
-  attachListener({plusButton, input, all, active, completed, clear_completed, sortingButton, form}, model, view) {
+  attachListener({
+                   plusButton, input, all,
+                   active, completed, clear_completed,
+                   sortingButton, form, sortByTextAscDesc,
+                   sortByDateCreatedAscDesc, sortByExpirationAscDesc,
+                   text, create, expiration
+                 },
+                 model, view, todosCollection) {
     plusButton.addEventListener('click', event => {
       event.preventDefault();
       if (input.value !== '') {
@@ -70,6 +77,41 @@ class View {
     sortingButton.addEventListener('click', event => {
       event.preventDefault();
       mediator.publish('showSortingBlock', model.todos, view);
+    });
+
+    sortByTextAscDesc.addEventListener('click', () => {
+      let existUp = DOM.containsClass(text, 'up');
+      if (existUp) {
+        mediator.publish('sortAscending', todosCollection, view);
+      } else {
+        mediator.publish('sortDescending', todosCollection, view);
+      }
+
+      DOM.toggleClass(text, 'up');
+      DOM.toggleClass(text, 'down');
+    });
+
+    sortByDateCreatedAscDesc.addEventListener('click', () => {
+      let existUp = DOM.containsClass(create, 'up');
+      if (existUp) {
+        mediator.publish('sortAscendingDate', todosCollection, view);
+      } else {
+        mediator.publish('sortDescendingDate', todosCollection, view);
+      }
+      DOM.toggleClass(create, 'up');
+      DOM.toggleClass(create, 'down');
+    });
+
+    sortByExpirationAscDesc.addEventListener('click', () => {
+      let existUp = DOM.containsClass(expiration, 'up');
+      if (existUp) {
+        mediator.publish('sortAscendingDate', todosCollection, view);
+      } else {
+        mediator.publish('sortDescendingDate', todosCollection, view);
+      }
+
+      DOM.toggleClass(expiration, 'up');
+      DOM.toggleClass(expiration, 'down');
     });
 
     form.addEventListener('keydown', event => {
@@ -114,8 +156,31 @@ class View {
     let clear_completed = DOM.getElement(template, '.clear_completed');
     let sortingButton = DOM.getElement(template, '.sorting');
     let form = DOM.getElement(template, 'form');
+    let sortByTextAscDesc = DOM.getElement(template, '.sortByTextAscDesc');
+    let sortByDateCreatedAscDesc = DOM.getElement(template, '.sortByDateCreatedAscDesc');
+    let sortByExpirationAscDesc = DOM.getElement(template, '.sortByExpirationAscDesc');
+    let text = DOM.getElement(template, '.text');
+    let create = DOM.getElement(template, '.create');
+    let expiration = DOM.getElement(template, '.expiration');
 
-    return {todoList, plusButton, input, leftItems, all, active, completed, clear_completed, sortingButton, form}
+    return {
+      todoList,
+      plusButton,
+      input,
+      leftItems,
+      all,
+      active,
+      completed,
+      clear_completed,
+      sortingButton,
+      form,
+      sortByTextAscDesc,
+      sortByDateCreatedAscDesc,
+      sortByExpirationAscDesc,
+      text,
+      create,
+      expiration
+    }
   }
 
 }

@@ -1,7 +1,7 @@
 class SortView {
   renderSortBlock(todosCollection, view) {
     this.queryElementAndAssignData(todosCollection, view);
-    this.attachListenersAndFireEventSort(todosCollection, view);
+    //this.attachListenersAndFireEventSort(todosCollection, view);
     //this.attachListenersAndFireEventFilter(view);
   }
 
@@ -18,9 +18,9 @@ class SortView {
     this.sortByTextAscend = DOM.getElement(view.template, '.sortByTextAscend');
     this.sortByDateCreatedAscend = DOM.getElement(view.template, '.sortByDateCreatedAscend');
     this.sortByExpirationAscend = DOM.getElement(view.template, '.sortByExpirationAscend');
-    this.sortByTextDescent = DOM.getElement(view.template, '.sortByTextDescent');
-    this.sortByDateCreatedDescent = DOM.getElement(view.template, '.sortByDateCreatedDescent');
-    this.sortByDateExpirationDescent = DOM.getElement(view.template, '.sortByDateExpirationDescent');
+    // this.sortByTextDescent = DOM.getElement(view.template, '.sortByTextDescent');
+    // this.sortByDateCreatedDescent = DOM.getElement(view.template, '.sortByDateCreatedDescent');
+    // this.sortByDateExpirationDescent = DOM.getElement(view.template, '.sortByDateExpirationDescent');
     this.filterText = DOM.getElement(view.template, '#filterText');
     this.startDate = DOM.getElement(view.template, '#startDate');
     this.expirationDate = DOM.getElement(view.template, '#expirationDate');

@@ -8,9 +8,9 @@ const formTpl = `
       </div>
   </form>
   <div class="row">
-    <button class="sortByTextAscend">Text ⬆️</button>
-    <button class="sortByDateCreatedAscend">Created date ⬆️</button>
-    <button class="sortByExpirationAscend">Expiration date ⬆️</button>
+    <span class="sortByTextAscDesc"><i class="arrow up text"></i> Text</span>
+    <span class="sortByDateCreatedAscDesc"><i class="arrow up create"></i> Created date</span>
+    <span class="sortByExpirationAscDesc"><i class="arrow up expiration"></i> Expiration date</span>
   </div>
   <div class="wrap-sort">
   </div>

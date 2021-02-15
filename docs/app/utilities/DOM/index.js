@@ -18,6 +18,14 @@ class DOM {
     return node.append(element);
   }
 
+  static containsClass(node, className) {
+    return node.classList.contains(className);
+  }
+
+  static toggleClass(node, className) {
+    node.classList.toggle(className);
+  }
+
   static addClassToNode(node, className) {
     node.classList.add(className);
   }
@@ -27,7 +35,7 @@ class DOM {
   }
 
   static lastChild(node) {
-    return node.lastElementChild
+    return node.lastElementChild;
   }
 
   static addContentStart(targetElement, containerEl) {
