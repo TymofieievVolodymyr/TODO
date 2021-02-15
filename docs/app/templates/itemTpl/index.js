@@ -5,6 +5,7 @@ const itemTpl = `
   Creation date<span class="currentDay"></span>
   Expiration date<span class="tomorrow"></span>
   <button class="pencil">✏️</button>
-  <button class="delete">x</button>
+<!--  <button class="delete">x</button>-->
+  <a class="delete">x</a>
 </li>
 `;
